@@ -1,12 +1,17 @@
-import React from "react";
-/* No longer causes an error with CRACO */
 import '@/static/index.css';
+
+import { Routes, Route } from "react-router-dom";
+
+import Category from "@/views/Category";
+import Details from "@/views/Details";
 
 export default function App() {
   return (
-    /* Ensuring tailwind is configured correctly */
     <div className="m-4">
-      Hi, Scandiweb!
+        <Routes>
+          <Route path="/" element={ <Category/> } />
+          <Route path="/details" element={ <Details/> } />
+        </Routes>
     </div>
   );
 }
