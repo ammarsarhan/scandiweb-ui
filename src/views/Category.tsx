@@ -12,11 +12,11 @@ export default class Category extends Component<CategoryProps> {
         return (
             <main className='mx-16 my-12'>
                 <h1 className='text-4xl font-light'>{label}</h1>
-                <div className='mt-16 overflow-visible grid lg:grid-cols-2 xl:grid-cols-3 gap-8'>
+                <div className='mt-16 overflow-visible grid lg:grid-cols-2 xl:grid-cols-3 gap-x-10 gap-y-16 2xl:gap-28'>
                     {/* Mock data to test the layout for now */}
                     <Card title='Running Short' price={50.00} imageSource='' outOfStock={false}/>
                     <Card title='Running Short' price={50.00} imageSource='' outOfStock={false}/>
-                    <Card title='Running Short' price={50.00} imageSource='' outOfStock={false}/>
+                    <Card title='Running Short' price={50.00} imageSource='' outOfStock={true}/>
                     <Card title='Running Short' price={50.00} imageSource='' outOfStock={false}/>
                     <Card title='Running Short' price={50.00} imageSource='' outOfStock={false}/>
                 </div>

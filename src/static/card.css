@@ -1,3 +1,31 @@
 div.card:hover {
     box-shadow: 0 0 35px 10px rgba(0,0,0,0.085);
 }
+
+div.card:hover > button.card-button {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+button.card-button {
+    transition: all 0.1s linear;
+    transform: translateY(-0.2rem);
+    opacity: 0;
+    background: #5ECE7B;
+}
+
+div.card.out-of-stock span {
+    color: #8D8F9A;
+}
+
+div.card.out-of-stock div.overlay {
+    color: white;
+    opacity: 0.5;
+    z-index: 99;
+}
+
+div.card.out-of-stock h6 {
+    color: #8D8F9A;
+    font-size: 24px;
+    font-weight: 400;
+}
