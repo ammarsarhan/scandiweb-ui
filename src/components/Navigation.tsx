@@ -16,7 +16,7 @@ export default class Navigation extends Component {
                     <NavLink to="/category/men">MEN</NavLink>
                     <NavLink to="/category/kids">KIDS</NavLink>
                 </div>
-                <img src={Logo} alt="Logo" className='absolute left-1/2'/>
+                <NavLink to="/" className="home absolute left-1/2"><img src={Logo} alt="Logo"/></NavLink>
                 <Cart/>
             </nav>
         )

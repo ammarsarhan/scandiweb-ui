@@ -1,11 +1,17 @@
 import { Component } from 'react';
 
-export default class Category extends Component {
+type CategoryProps = {
+    variant: string
+
+}
+
+export default class Category extends Component<CategoryProps> {
     render () {
+        const category = this.props.variant.charAt(0).toUpperCase() + this.props.variant.slice(1);
         return (
-            <div>
-                <span>Category Page</span>
-            </div>
+            <main className='mx-16 my-12'>
+                <h1 className='text-4xl font-light'>{category}</h1>
+            </main>
         )
     }
 }
