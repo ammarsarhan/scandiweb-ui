@@ -1,8 +1,9 @@
+/* Used border-bottom instead of text-decoration to add x-direction padding under active link */
 a.active {
     color: #5ECE7B;
     border-bottom: 1px solid #5ECE7B;
 }
 
 a {
-    padding: 1rem;
+    padding: 1rem 1rem 1.5rem;
 }

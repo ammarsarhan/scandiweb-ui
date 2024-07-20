@@ -1,7 +1,11 @@
-export default function Category () {
-    return (
-        <div>
-            <span>Category Page</span>
-        </div>
-    )
+import { Component } from 'react';
+
+export default class Category extends Component {
+    render () {
+        return (
+            <div>
+                <span>Category Page</span>
+            </div>
+        )
+    }
 }
