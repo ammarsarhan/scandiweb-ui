@@ -4,16 +4,21 @@ import reportWebVitals from './reportWebVitals';
 
 import App from '@/App';
 import Navigation from '@/components/Navigation';
+import CartDropdown from '@/components/cart/CartDropdown';
 
 import './static/index.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <BrowserRouter>
     <Navigation/>
-    <App/>
+    <div className='relative'>
+      <CartDropdown isActive={true}/>
+      <App/>
+    </div>
   </BrowserRouter>
 );
 

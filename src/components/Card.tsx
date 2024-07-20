@@ -7,13 +7,13 @@ type CardProps = {
     title: string;
     price: number;
     imageSource: string;
-    outOfStock: boolean;
+    inStock: boolean;
 }
 
 export default class Card extends Component<CardProps> {
-    render() {
+    render () {
         // Render card component without functionality if out of stock
-        if (this.props.outOfStock) {
+        if (!this.props.inStock) {
             return (
                 <div className="w-full h-full flex-center">
                     <div className="card out-of-stock w-96 p-3">

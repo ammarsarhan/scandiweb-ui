@@ -21,7 +21,7 @@ div.card.out-of-stock span {
 div.card.out-of-stock div.overlay {
     color: white;
     opacity: 0.5;
-    z-index: 99;
+    z-index: 10;
 }
 
 div.card.out-of-stock h6 {
