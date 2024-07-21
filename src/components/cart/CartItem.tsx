@@ -1,18 +1,19 @@
 import { Component } from 'react';
 
 type CartItemProps = {
-    title: string;
+    name: string;
     price: number;
     quantity: number;
     attributes: object[];
+    imageSource: string;
 }
 
 export default class CartItem extends Component<CartItemProps> {
     render () {
         return (
-            <div className='item flex'>
+            <div className='item grid grid-cols-3'>
                 <div className='flex flex-col flex-grow gap-y-2'>
-                    <h3 className='font-extralight'>{this.props.title}</h3>
+                    <h3 className='font-extralight'>{this.props.name}</h3>
                     <span className='font-medium'>${this.props.price.toFixed(2)}</span>
                     {/* First higher-level map through options array */}
                     {this.props.attributes.map((element, index) => {
@@ -72,7 +73,9 @@ export default class CartItem extends Component<CartItemProps> {
                     </svg>
                     </button>
                 </div>
-                <img src="" alt="item-image"/>
+                <div className='h-full w-28 flex-center'>
+                    <img src={this.props.imageSource} alt="item-image" className='object-contain h-full w-full'/>
+                </div>
             </div>
         )
     }

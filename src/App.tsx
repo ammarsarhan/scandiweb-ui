@@ -5,15 +5,15 @@ import View from '@/View';
 import Navigation from '@/components/Navigation';
 import CartDropdown from '@/components/cart/CartDropdown';
 
-
 export default class App extends Component<{}, {dropdownActive: boolean}> {
     switchDropdownActive = () => {
         this.state.dropdownActive ? this.setState({dropdownActive: false}) : this.setState({dropdownActive: true});
     }
 
     state = {
-        dropdownActive: true,
-        switchDropdownActive: this.switchDropdownActive
+        dropdownActive: false,
+        switchDropdownActive: this.switchDropdownActive,
+        cartItems: []
     }
 
     render () {

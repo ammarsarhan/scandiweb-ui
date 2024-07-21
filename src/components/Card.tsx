@@ -2,6 +2,11 @@ import { Component } from "react";
 import CartIcon from '@/static/assets/Cart-Alt.svg';
 import '@/static/card.css';
 
+import { ProductType } from "@/types/product";
+import { CartContext, CartContextType } from "@/context/CartContext"
+
+import mock from '../data.json'
+
 // To be filled with data from API and then passed to the Card component through .map() and props
 type CardProps = {
     title: string;
@@ -11,6 +16,12 @@ type CardProps = {
 }
 
 export default class Card extends Component<CardProps> {
+    static contextType = CartContext;
+
+    addToCart = (product: ProductType) => {
+       (this.context as CartContextType).cartItems.push(product);
+    }
+
     render () {
         // Render card component without functionality if out of stock
         if (!this.props.inStock) {
@@ -43,7 +54,8 @@ export default class Card extends Component<CardProps> {
                             <span>${this.props.price.toFixed(2)}</span>
                         </div>
                         <button className="card-button flex-center absolute bottom-16 right-8 p-3 rounded-full">
-                            <img src={CartIcon} alt="cart-icon"/>
+                            {/* Mock data to add to cart */}
+                            <img src={CartIcon} alt="cart-icon" onClick={() => this.addToCart(mock.data.products[6])}/>
                         </button>
                     </div>
                 </div>

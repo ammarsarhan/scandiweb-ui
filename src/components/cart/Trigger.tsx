@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import Icon from '@/static/assets/Cart.svg';
-import { CartContext } from '@/context/CartContext';
+import { CartContextType, CartContext } from '@/context/CartContext';
 
 type TriggerState = {
     products: number;
@@ -9,23 +9,20 @@ type TriggerState = {
 export default class Trigger extends Component<{}, TriggerState> {
     static contextType = CartContext;
 
-    // Setting mock data to render component layout
-    state = {
-        products: 2
-    }
-
     handleTriggerClicked = () => {
         // this.context will be set on runtime by contextType
-        const { switchDropdownActive } = this.context;
+        const { switchDropdownActive } = this.context as CartContextType;
         switchDropdownActive();
     }
 
     // Function to render counter on cart icon if products in cart
     renderCounter () {
-        if (this.state.products > 0) {
+        const { cartItems } = this.context as CartContextType;
+
+        if (cartItems.length > 0) {
             return (
                 <div className='flex-center absolute -top-3 -right-3 bg-black w-5 h-5 rounded-full'>
-                    <span className='font-semibold text-white text-sm align-middle'>{this.state.products}</span>
+                    <span className='font-semibold text-white text-sm align-middle'>{cartItems.length}</span>
                 </div>
             )
         }
