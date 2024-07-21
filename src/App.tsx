@@ -1,23 +1,30 @@
-import '@/static/index.css';
+import { Component } from 'react'
+import { DropdownContext } from './context/DropdownContext';
 
-import { Component } from 'react';
-import { Routes, Route, Navigate } from "react-router-dom";
+import View from '@/View';
+import Navigation from '@/components/Navigation';
+import CartDropdown from '@/components/cart/CartDropdown';
 
-import Category from "@/views/Category";
-import Details from "@/views/Details";
 
-export default class App extends Component {
-  render () {
-    return (
-      // Setting up routing with React Router V6
-      <Routes>
-        {/* Automatically redirect index page to first category as per spec */}
-        <Route path='/' element={ <Navigate to="/category/women"/>} />
-        <Route path="/category/women" element={ <Category variant="women"/> } />
-        <Route path="/category/men" element={ <Category variant="men"/> } />
-        <Route path="/category/kids" element={ <Category variant="kids"/> } />
-        <Route path="/details/:id" element={ <Details/> } />
-      </Routes>
-    );
-  }
+export default class App extends Component<{}, {dropdownActive: boolean}> {
+    switchDropdownActive = () => {
+        this.state.dropdownActive ? this.setState({dropdownActive: false}) : this.setState({dropdownActive: true});
+    }
+
+    state = {
+        dropdownActive: true,
+        switchDropdownActive: this.switchDropdownActive
+    }
+
+    render () {
+        return (
+            <DropdownContext.Provider value={this.state}>
+                <Navigation/>
+                <div className='relative'>
+                    <CartDropdown/>
+                    <View/>
+                </div>
+            </DropdownContext.Provider>
+        )
+    }
 }

@@ -1,43 +1,40 @@
 import { Component } from 'react';
 import Icon from '@/static/assets/Cart.svg';
+import { DropdownContext } from '@/context/DropdownContext';
 
-type TriggerProps = {
+type TriggerState = {
     products: number;
-    setToggle: (data: boolean) => void;
 }
 
-export default class Trigger extends Component<TriggerProps, {isActive: boolean}> {
-    // Switch & pass state to Navigation component to toggle overlay
-    handleToggle = () => {
-        if (this.state.isActive) {
-            this.props.setToggle(false)
-            this.setState({isActive: false})
-        } else {
-            this.props.setToggle(true)
-            this.setState({isActive: true})
-        }
+export default class Trigger extends Component<{}, TriggerState> {
+    static contextType = DropdownContext;
+
+    // Setting mock data to render component layout
+    state = {
+        products: 2
+    }
+
+    handleTriggerClicked = () => {
+        // this.context will be set on runtime by contextType
+        const { switchDropdownActive } = this.context;
+        switchDropdownActive();
     }
 
     // Function to render counter on cart icon if products in cart
     renderCounter () {
-        if (this.props.products > 0) {
+        if (this.state.products > 0) {
             return (
                 <div className='flex-center absolute -top-3 -right-3 bg-black w-5 h-5 rounded-full'>
-                    <span className='font-semibold text-white text-sm align-middle'>{this.props.products}</span>
+                    <span className='font-semibold text-white text-sm align-middle'>{this.state.products}</span>
                 </div>
             )
         }
     }
-
-    // Set inital overlay state to false
-    componentDidMount() {
-        this.setState({isActive: false})
-    }
-
+    
     render () {
         return (
-            // To be used to trigger cart overlay and set overlayActive state (to gray out) in view components
-            <button className='relative' onClick={this.handleToggle}>
+            // Trigger cart overlay and set overlayActive state (to gray out) in view components
+            <button className='relative' onClick={this.handleTriggerClicked}>
                 {this.renderCounter()}
                 <img src={Icon} alt="View Cart"/>
             </button>

@@ -1,9 +1,6 @@
 import { Component } from 'react'
+import { DropdownContext } from '@/context/DropdownContext'
 import CartItem from '@/components/cart/CartItem'
-
-type CartDropdownProps = {
-    isActive: boolean;
-}
 
 // Dummy data for testing
 const one = [
@@ -130,31 +127,38 @@ const two = [
     }
 ]
 
-export default class CartDropdown extends Component<CartDropdownProps> {
-    render () {
-        if (this.props.isActive) {
-            // Stop user from scrolling while dropdown is active
-            document.body.style.overflow = 'hidden';
+export default class CartDropdown extends Component {
+  render () {
+    return (
+      // Remove local state and use Context API to globalize dropdown state
+      <DropdownContext.Consumer>
+        {(context) => {
+            if (context.dropdownActive) {
+              // Stop user from scrolling while dropdown is active
+              document.body.style.overflow = 'hidden';
 
-            // And return dropdown & overlay
-            return (
-                <>
-                    {/* Actual dropdown section */}
-                    <div className="overflow-y-auto absolute right-10 cart-dropdown bg-white z-50 p-5">
-                        <h6 className='mt-4 mb-8'><span className='font-semibold'>My Bag,</span> 3 items</h6>
-                        <div className='flex flex-col gap-y-8 h-96 overflow-y-auto'>
-                            <CartItem title="Running Short" price={50} quantity={1} attributes={one}/>
-                            <CartItem title="Running Short" price={50} quantity={2} attributes={two}/>
-                        </div>
-                    </div>
-                    {/* Overlay to gray out */}
-                    <div className="overlay fixed w-full h-full bg-black opacity-20 z-30"></div>
-                </>
-            )
-        } else {
-            // Allow user to scroll again when dropdown is inactive
-            document.body.style.overflow = 'visible';
-            return <></>
-        }
-    }
+              // And return dropdown & overlay
+              return (
+                  <>
+                      {/* Actual dropdown section */}
+                      <div className="overflow-y-auto absolute right-10 cart-dropdown bg-white z-50 p-5">
+                          <h6 className='mt-4 mb-8'><span className='font-semibold'>My Bag,</span> 3 items</h6>
+                          <div className='flex flex-col gap-y-8 h-96 overflow-y-auto'>
+                              <CartItem title="Running Short" price={50} quantity={1} attributes={one}/>
+                              <CartItem title="Running Short" price={50} quantity={2} attributes={two}/>
+                          </div>
+                      </div>
+                      {/* Overlay to gray out */}
+                      <div className="overlay fixed w-full h-full bg-black opacity-20 z-30"></div>
+                  </>
+              )
+          } else {
+              // Allow user to scroll again when dropdown is inactive
+              document.body.style.overflow = 'visible';
+              return <></>
+          }
+        }}
+      </DropdownContext.Consumer>
+    )
+  }
 }

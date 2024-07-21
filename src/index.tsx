@@ -1,6 +1,8 @@
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
-import RouterWrapper from '@/RouterWrapper';
+import { BrowserRouter } from "react-router-dom"
+
+import App from '@/App';
 
 import './static/index.css';
 
@@ -9,7 +11,9 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <RouterWrapper/>
+  <BrowserRouter>
+    <App/>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
