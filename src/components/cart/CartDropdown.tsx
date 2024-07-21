@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { DropdownContext } from '@/context/DropdownContext'
+import { CartContext } from '@/context/CartContext'
 import CartItem from '@/components/cart/CartItem'
 
 // Dummy data for testing
@@ -131,7 +131,7 @@ export default class CartDropdown extends Component {
   render () {
     return (
       // Remove local state and use Context API to globalize dropdown state
-      <DropdownContext.Consumer>
+      <CartContext.Consumer>
         {(context) => {
             if (context.dropdownActive) {
               // Stop user from scrolling while dropdown is active
@@ -149,7 +149,7 @@ export default class CartDropdown extends Component {
                           </div>
                       </div>
                       {/* Overlay to gray out */}
-                      <div className="overlay fixed w-full h-full bg-black opacity-20 z-30"></div>
+                      <div className="overlay fixed w-full h-full bg-black opacity-20 z-30" onClick={context.switchDropdownActive}></div>
                   </>
               )
           } else {
@@ -158,7 +158,7 @@ export default class CartDropdown extends Component {
               return <></>
           }
         }}
-      </DropdownContext.Consumer>
+      </CartContext.Consumer>
     )
   }
 }

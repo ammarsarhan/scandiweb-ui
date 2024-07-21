@@ -2,4 +2,4 @@
 // using React Context API instead of prop drilling
 
 import { createContext } from "react";
-export const DropdownContext = createContext({dropdownActive: false, switchDropdownActive: () => {}});
+export const CartContext = createContext({dropdownActive: false, switchDropdownActive: () => {}});

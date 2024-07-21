@@ -1,13 +1,13 @@
 import { Component } from 'react';
 import Icon from '@/static/assets/Cart.svg';
-import { DropdownContext } from '@/context/DropdownContext';
+import { CartContext } from '@/context/CartContext';
 
 type TriggerState = {
     products: number;
 }
 
 export default class Trigger extends Component<{}, TriggerState> {
-    static contextType = DropdownContext;
+    static contextType = CartContext;
 
     // Setting mock data to render component layout
     state = {

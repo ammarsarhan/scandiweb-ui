@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { DropdownContext } from './context/DropdownContext';
+import { CartContext } from './context/CartContext';
 
 import View from '@/View';
 import Navigation from '@/components/Navigation';
@@ -18,13 +18,13 @@ export default class App extends Component<{}, {dropdownActive: boolean}> {
 
     render () {
         return (
-            <DropdownContext.Provider value={this.state}>
+            <CartContext.Provider value={this.state}>
                 <Navigation/>
                 <div className='relative'>
                     <CartDropdown/>
                     <View/>
                 </div>
-            </DropdownContext.Provider>
+            </CartContext.Provider>
         )
     }
 }
