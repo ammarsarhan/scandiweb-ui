@@ -18,9 +18,9 @@ export default class Navigation extends Component<{}, NavigationState> {
     
                 {/* Responsivity needs a bit of refining but works for now */}
                 <div className='hidden md:flex'>
-                    <NavLink to="/category/women">WOMEN</NavLink>
-                    <NavLink to="/category/men">MEN</NavLink>
-                    <NavLink to="/category/kids">KIDS</NavLink>
+                    <NavLink to="/category/all">ALL</NavLink>
+                    <NavLink to="/category/clothes">CLOTHES</NavLink>
+                    <NavLink to="/category/tech">TECH</NavLink>
                 </div>
                 <NavLink to="/" className="home absolute left-1/2"><img src={Logo} alt="Logo"/></NavLink>
                 <Trigger/>

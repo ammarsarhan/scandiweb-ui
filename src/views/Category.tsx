@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import Card from '@/components/Card';
 
+import file from '../data.json'
+
 type CategoryProps = {
     variant: string
 }
@@ -14,11 +16,13 @@ export default class Category extends Component<CategoryProps> {
                 <h1 className='text-4xl font-light my-8'>{label}</h1>
                 <div className='mt-16 overflow-visible grid lg:grid-cols-2 xl:grid-cols-3 gap-x-10 gap-y-16 2xl:gap-28'>
                     {/* Mock data to test the layout for now */}
-                    <Card title='Running Short' price={50.00} imageSource='' inStock={true}/>
-                    <Card title='Running Short' price={50.00} imageSource='' inStock={false}/>
-                    <Card title='Running Short' price={50.00} imageSource='' inStock={true}/>
-                    <Card title='Running Short' price={50.00} imageSource='' inStock={false}/>
-                    <Card title='Running Short' price={50.00} imageSource='' inStock={true}/>
+                    {
+                        file.data.products.map((product, index) => {
+                            return (
+                                <Card key={index} title={product.name} price={product.prices[0].amount} imageSource={product.gallery[0]} inStock={product.inStock} id={product.id}/>
+                            )
+                        })
+                    }
                 </div>
             </main>
         )

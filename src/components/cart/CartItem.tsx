@@ -27,7 +27,7 @@ export default class CartItem extends Component<CartItemProps> {
                                     <div className='flex gap-x-2'>
                                         {option.items.map((selections: object, index: number) => {
                                             const selection = JSON.parse(JSON.stringify(selections))
-                                            return <button className="w-5 h-5 border-[1px]" style={{backgroundColor: selection.value}} key={index}></button>
+                                            return <div className="w-5 h-5 border-[1px]" style={{backgroundColor: selection.value}} key={index}></div>
                                         })}
                                     </div>
                                 </div>
@@ -40,7 +40,7 @@ export default class CartItem extends Component<CartItemProps> {
                                     <div className='flex gap-x-2'>
                                         {option.items.map((selections: object, index: number) => {
                                             const selection = JSON.parse(JSON.stringify(selections))
-                                            return <button className='border-[1px] p-1 border-black text-sm' key={index}>{selection.displayValue}</button>
+                                            return <div className='border-[1px] p-1 border-black text-sm' key={index}>{selection.displayValue}</div>
                                         })}
                                     </div>
                                 </div>
