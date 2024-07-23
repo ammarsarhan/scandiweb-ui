@@ -1,10 +1,17 @@
 import { Component } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 
-export default class Details extends Component {
+interface MatchParams {
+    id: string;
+}
+
+interface DetailsProps extends RouteComponentProps<MatchParams> {}
+
+export default class Details extends Component<DetailsProps> {
     render () {
         return (
             <div>
-                <span>Details Page</span>
+                <span>Details Page {this.props.match.params.id}</span>
             </div>
         )
     }

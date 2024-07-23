@@ -25,9 +25,7 @@ export default class View extends Component {
         <Route exact path="/category/tech">
           <Category variant='tech'/>
         </Route>
-        <Route exact path="/details/:id">
-          <Details/>
-        </Route>
+        <Route exact path="/details/:id" component={Details}/>
       </Switch>
     );
   }
