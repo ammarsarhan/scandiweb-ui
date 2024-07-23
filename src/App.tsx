@@ -21,7 +21,6 @@ export default class App extends Component<{}, {dropdownActive: boolean}> {
                 return null;
             })
 
-            console.log("Current quantity:", quantity);
             return quantity;
         },
         // Define function to map through array and get the total price
@@ -32,7 +31,6 @@ export default class App extends Component<{}, {dropdownActive: boolean}> {
                 return null;
             })
 
-            console.log("Current total:", total);
             return total;
         }
     }

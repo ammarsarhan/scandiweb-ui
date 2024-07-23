@@ -12,7 +12,6 @@ export default class CartDropdown extends Component {
             if (context.dropdownActive) {
               // Stop user from scrolling while dropdown is active
               document.body.style.overflow = 'hidden';
-
               // And return dropdown & overlay
               return (
                   <>
@@ -32,7 +31,7 @@ export default class CartDropdown extends Component {
                           </div>
                           <div className='flex justify-between items-center font-semibold my-8'>
                             <span>Total</span>
-                            <span>${context.getTotal()}</span>
+                            <span>${context.getTotal().toFixed(2)}</span>
                           </div>
                           <button className='text-center font-medium block w-full px-16 py-4 my-4 text-white bg-[#5ECE7B]'>PLACE ORDER</button>
                       </div>
