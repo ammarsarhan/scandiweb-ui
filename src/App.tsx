@@ -5,6 +5,8 @@ import View from '@/View';
 import Navigation from '@/components/Navigation';
 import CartDropdown from '@/components/cart/CartDropdown';
 
+import { BrowserRouter as Router } from 'react-router-dom';
+
 import { CartItemType } from './types/cart';
 
 export default class App extends Component {
@@ -85,13 +87,15 @@ export default class App extends Component {
 
     render () {
         return (
-            <CartContext.Provider value={this.state}>
-                <Navigation/>
-                <div className='relative'>
-                    <CartDropdown/>
-                    <View/>
-                </div>
-            </CartContext.Provider>
+            <Router>
+                <CartContext.Provider value={this.state}>
+                    <Navigation/>
+                    <div className='relative'>
+                        <CartDropdown/>
+                        <View/>
+                    </div>
+                </CartContext.Provider>
+            </Router>
         )
     }
 }
