@@ -9,7 +9,10 @@ const initialCartSettings = {
     switchDropdownActive: () => {},
     cartItems: [],
     getQuantity: () => 0,
-    getTotal: () => 0
+    getTotal: () => 0,
+    addProductToCart: () => {},
+    incrementProduct: () => {},
+    decrementProduct: () => {},
 }
 
 export type CartContextType = {
@@ -18,6 +21,9 @@ export type CartContextType = {
     cartItems: CartItemType[];
     getQuantity: () => number;
     getTotal: () => number;
+    addProductToCart: (item: CartItemType) => void;
+    incrementProduct: (index: number) => void;
+    decrementProduct: (index: number) => void;
 }
 
 export const CartContext = createContext(initialCartSettings as CartContextType);

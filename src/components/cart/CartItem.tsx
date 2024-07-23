@@ -4,28 +4,14 @@ import { CartItemType } from '@/types/cart';
 
 export default class CartItem extends Component<CartItemType> {
     static contextType = CartContext;
+    ctx = this.context as CartContextType;
     
     incrementQuantity = (index: number) => {
-        const ctx = this.context as CartContextType;
-
-        ctx.cartItems[index].quantity += 1;
-        this.setState({quantity: this.state.quantity + 1})
+        this.ctx.incrementProduct(index);
     }
-
+    
     decrementQuantity = (index: number) => {
-        const ctx = this.context as CartContextType;
-
-        if (this.state.quantity > 1) {
-            ctx.cartItems[index].quantity -= 1;
-            this.setState({quantity: this.state.quantity - 1})
-        } else {
-            // Remove item from cart if quantity is 0
-            ctx.cartItems.splice(index, 1);
-        }
-    }
-
-    state = {
-        quantity: this.props.quantity
+        this.ctx.decrementProduct(index);
     }
 
     render () {
@@ -87,7 +73,7 @@ export default class CartItem extends Component<CartItemType> {
                 </div>
                 <div className='flex flex-col items-center px-8'>
                     {/* Increment button copied from figma design */}
-                    <button onClick={() => this.incrementQuantity(0)}>
+                    <button onClick={() => this.incrementQuantity(this.props.listIndex)}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clipPath="url(#clip0_92234_46)">
                                 <path d="M12 8V16" stroke="#1D1F22" strokeLinecap="round" strokeLinejoin="round"/>
@@ -101,9 +87,9 @@ export default class CartItem extends Component<CartItemType> {
                             </defs>
                         </svg>
                     </button>
-                    <span className='flex-grow flex-center'>{this.state.quantity}</span>
+                    <span className='flex-grow flex-center'>{this.ctx.cartItems[this.props.listIndex].quantity}</span>
                     {/* Decrement button copied from figma design */}
-                    <button onClick={() => this.decrementQuantity(0)}>
+                    <button onClick={() => this.decrementQuantity(this.props.listIndex)}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="0.5" y="0.5" width="23" height="23" stroke="#1D1F22"/>
                             <path d="M8 12H16" stroke="#1D1F22" strokeLinecap="round" strokeLinejoin="round"/>

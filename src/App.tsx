@@ -7,7 +7,7 @@ import CartDropdown from '@/components/cart/CartDropdown';
 
 import { CartItemType } from './types/cart';
 
-export default class App extends Component<{}, {dropdownActive: boolean}> {
+export default class App extends Component {
     state = {
         dropdownActive: false,
         // Define function to set dropdown state by switching current value to opposite
@@ -32,6 +32,54 @@ export default class App extends Component<{}, {dropdownActive: boolean}> {
             })
 
             return total;
+        },
+        // Add function to increment quantity of product
+        incrementProduct: (index: number) => {
+            let newCart = this.state.cartItems;
+            newCart[index].quantity += 1;
+            this.setState({cartItems: newCart});
+        },
+        // Add function to decrement quantity of product
+        decrementProduct: (index: number) => {
+            let newCart = this.state.cartItems;
+            newCart[index].quantity -= 1;
+
+            if (newCart[index].quantity < 1) {
+                newCart.splice(index, 1);
+            }
+
+            this.setState({cartItems: newCart});
+        },
+        // Add function to add product to cart
+        addProductToCart: (item: CartItemType) => {
+            let duplicateFlag = false;
+    
+            // Filling selectionIndices array with 0 (start of attributes index as default)
+            item.selectionIndices = Array(item.product.attributes.length).fill(0);
+    
+            // Checking for duplicates of products in cart already
+            this.state.cartItems.map((cartItem, index) => {
+                if (cartItem.product === item.product) {
+                    // If the selectionIndices are the same, then it's a duplicate
+                    // Javascript treats Arrays byref, so we need to stringify them
+                    if (JSON.stringify(cartItem.selectionIndices) === JSON.stringify(item.selectionIndices)) {
+                        // Create new array for React to detect value change
+                        let newCart = this.state.cartItems;
+                        newCart[index].quantity += 1;
+                        this.setState({cartItems: newCart});
+                        
+                        duplicateFlag = true;
+                    }
+                }
+    
+                return null;
+            })
+    
+            // If no duplicates are found, push the item to the cart
+            if (duplicateFlag === false) {
+                // Create new array for React to detect value change
+                this.setState({cartItems: [...this.state.cartItems, item]});
+            }
         }
     }
 
