@@ -17,11 +17,11 @@ export default class CartDropdown extends Component {
               return (
                   <>
                       {/* Actual dropdown section */}
-                      <div className="absolute md:right-10 cart-dropdown bg-white z-50 p-5 w-full h-full md:w-auto md:h-auto">
+                      <div className="absolute md:right-10 cart-dropdown bg-white z-50 p-5 w-full h-full md:w-96 md:h-auto">
                           <h6 className='mt-4 mb-8'>
                             <span className='font-semibold'>My Bag</span>
-                            {context.cartItems.length > 1 && `, ${context.cartItems.length} items`}
-                            {context.cartItems.length === 1 && `, ${context.cartItems.length} item`}
+                            {context.getQuantity() > 1 && `, ${context.getQuantity()} items`}
+                            {context.getQuantity() === 1 && `, ${context.getQuantity()} item`}
                           </h6>
                           <div className='flex flex-col gap-y-12 max-h-96 md:max-h-80 overflow-y-auto'>
                               {
@@ -32,7 +32,7 @@ export default class CartDropdown extends Component {
                           </div>
                           <div className='flex justify-between items-center font-semibold my-8'>
                             <span>Total</span>
-                            <span>$00.00</span>
+                            <span>${context.getTotal()}</span>
                           </div>
                           <button className='text-center font-medium block w-full px-16 py-4 my-4 text-white bg-[#5ECE7B]'>PLACE ORDER</button>
                       </div>

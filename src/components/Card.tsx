@@ -13,10 +13,29 @@ export default class Card extends Component<{product: ProductType}> {
     
     quickAddToCart = (item: CartItemType) => {
         const ctx = this.context as CartContextType;
+        let duplicateFlag = false;
 
         // Filling selectionIndices array with 0 (start of attributes index as default)
         item.selectionIndices = Array(item.product.attributes.length).fill(0);
-        ctx.cartItems.push(item);
+
+        // Checking for duplicates of products in cart already
+        ctx.cartItems.map((cartItem) => {
+            if (cartItem.product === item.product) {
+                // If the selectionIndices are the same, then it's a duplicate
+                // Javascript treats Arrays by reference, so we need to stringify them
+                if (JSON.stringify(cartItem.selectionIndices) === JSON.stringify(item.selectionIndices)) {
+                    cartItem.quantity += 1;
+                    duplicateFlag = true;
+                }
+            }
+
+            return null;
+        })
+
+        // If no duplicates are found, push the item to the cart
+        if (duplicateFlag === false) {
+            ctx.cartItems.push(item);
+        }
     }
 
     render () {

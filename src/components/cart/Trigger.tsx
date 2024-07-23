@@ -17,12 +17,12 @@ export default class Trigger extends Component<{}, TriggerState> {
 
     // Function to render counter on cart icon if products in cart
     renderCounter () {
-        const { cartItems } = this.context as CartContextType;
+        const { getQuantity } = this.context as CartContextType;
 
-        if (cartItems.length > 0) {
+        if (getQuantity() > 0) {
             return (
                 <div className='flex-center absolute -top-3 -right-3 bg-black w-5 h-5 rounded-full'>
-                    <span className='font-semibold text-white text-sm align-middle'>{cartItems.length}</span>
+                    <span className='font-semibold text-white text-sm align-middle'>{getQuantity()}</span>
                 </div>
             )
         }

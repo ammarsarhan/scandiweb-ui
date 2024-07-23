@@ -2,6 +2,22 @@ import { Component } from 'react';
 import { CartItemType } from '@/types/cart';
 
 export default class CartItem extends Component<CartItemType> {
+    incrementQuantity = () => {
+        this.setState({quantity: this.state.quantity + 1})
+    }
+
+    decrementQuantity = () => {
+        if (this.state.quantity > 0) {
+            this.setState({quantity: this.state.quantity - 1})
+        } else {
+            // Remove item from cart if quantity is 0
+        }
+    }
+
+    state = {
+        quantity: this.props.quantity
+    }
+
     render () {
         return (
             <div className='item grid grid-cols-3'>
@@ -61,27 +77,27 @@ export default class CartItem extends Component<CartItemType> {
                 </div>
                 <div className='flex flex-col items-center px-8'>
                     {/* Increment button copied from figma design */}
-                    <button>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clipPath="url(#clip0_92234_46)">
-                        <path d="M12 8V16" stroke="#1D1F22" strokeLinecap="round" strokeLinejoin="round"/>
-                        <path d="M8 12H16" stroke="#1D1F22" strokeLinecap="round" strokeLinejoin="round"/>
-                        <rect x="0.5" y="0.5" width="23" height="23" stroke="#1D1F22"/>
-                        </g>
-                        <defs>
-                        <clipPath id="clip0_92234_46">
-                        <rect width="24" height="24" fill="white"/>
-                        </clipPath>
-                        </defs>
-                    </svg>
+                    <button onClick={this.incrementQuantity}>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clipPath="url(#clip0_92234_46)">
+                                <path d="M12 8V16" stroke="#1D1F22" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M8 12H16" stroke="#1D1F22" strokeLinecap="round" strokeLinejoin="round"/>
+                                <rect x="0.5" y="0.5" width="23" height="23" stroke="#1D1F22"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_92234_46">
+                                    <rect width="24" height="24" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
                     </button>
-                    <span className='flex-grow flex-center'>{this.props.quantity}</span>
+                    <span className='flex-grow flex-center'>{this.state.quantity}</span>
                     {/* Decrement button copied from figma design */}
-                    <button>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="0.5" y="0.5" width="23" height="23" stroke="#1D1F22"/>
-                        <path d="M8 12H16" stroke="#1D1F22" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
+                    <button onClick={this.decrementQuantity}>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0.5" y="0.5" width="23" height="23" stroke="#1D1F22"/>
+                            <path d="M8 12H16" stroke="#1D1F22" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
                     </button>
                 </div>
                 <div className='h-full w-28 flex-center'>
