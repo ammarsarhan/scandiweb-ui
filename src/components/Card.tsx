@@ -3,32 +3,27 @@ import CartIcon from '@/static/assets/Cart-Alt.svg';
 import '@/static/card.css';
 
 import { ProductType } from "@/types/product";
+import { CartItemType } from '@/types/cart'
 import { CartContext, CartContextType } from "@/context/CartContext"
 
-import mock from '../data.json'
 import { Link } from "react-router-dom";
 
-// To be filled with data from API and then passed to the Card component through .map() and props
-type CardProps = {
-    title: string;
-    price: number;
-    imageSource: string;
-    inStock: boolean;
-    id: string;
-}
-
-export default class Card extends Component<CardProps> {
+export default class Card extends Component<{product: ProductType}> {
     static contextType = CartContext;
+    
+    quickAddToCart = (item: CartItemType) => {
+        const ctx = this.context as CartContextType;
 
-    addToCart = (product: ProductType) => {
-       (this.context as CartContextType).cartItems.push(product);
+        // Filling selectionIndices array with 0 (start of attributes index as default)
+        item.selectionIndices = Array(item.product.attributes.length).fill(0);
+        ctx.cartItems.push(item);
     }
 
     render () {
         // Render card component without functionality if out of stock
-        if (!this.props.inStock) {
+        if (!this.props.product.inStock) {
             return (
-                <Link to={`/details/${this.props.id}`}>
+                <Link to={`/details/${this.props.product.id}`}>
                     <div className="w-full h-full flex-center">
                         <div className="card out-of-stock w-96 p-3">
                             {/* Out of stock overlay wrapper */}
@@ -37,11 +32,11 @@ export default class Card extends Component<CardProps> {
                                 <div className="overlay absolute h-full w-full flex-center">
                                     <h6>OUT OF STOCK</h6>
                                 </div>
-                                <img src={this.props.imageSource} alt={`${this.props.title}-image`} className="w-full h-full object-contain opacity-50"/>
+                                <img src={this.props.product.gallery[0]} alt={`${this.props.product.name}-image`} className="w-full h-full object-contain opacity-50"/>
                             </div>
                             <div className="mt-6 flex flex-col gap-1">
-                                <h3 className="font-light">{this.props.title}</h3>
-                                <span>${this.props.price.toFixed(2)}</span>
+                                <h3 className="font-light">{this.props.product.name}</h3>
+                                <span>{this.props.product.prices[0].currency.symbol}{this.props.product.prices[0].amount}</span>
                             </div>
                         </div>
                     </div>
@@ -50,21 +45,22 @@ export default class Card extends Component<CardProps> {
         } else {
             // Render card component with full functionality if not out of stock
             return (
-                <Link to={`/details/${this.props.id}`}>
-                    <div className="w-full h-full flex-center">
-                        <div className="card w-96 p-3 relative">
-                            <img src={this.props.imageSource} alt={`${this.props.title}-image`} className="w-full h-80 object-contain"/>
-                            <div className="mt-6 flex flex-col gap-1">
-                                <h3 className="font-light">{this.props.title}</h3>
-                                <span>${this.props.price.toFixed(2)}</span>
+                <div className="flex-center h-full w-full">
+                    <div className="card relative p-3">
+                        <Link to={`/details/${this.props.product.id}`} className="block w-96 p-0">
+                            <div className="w-96">
+                                <img src={this.props.product.gallery[0]} alt={`${this.props.product.name}-image`} className="w-full h-80 object-contain"/>
+                                <div className="mt-6 flex flex-col gap-1">
+                                    <h3 className="font-light">{this.props.product.name}</h3>
+                                    <span>{this.props.product.prices[0].currency.symbol}{this.props.product.prices[0].amount}</span>
+                                </div>
                             </div>
-                            <button className="card-button flex-center absolute bottom-16 right-8 p-3 rounded-full">
-                                {/* Mock data to add to cart */}
-                                <img src={CartIcon} alt="cart-icon" onClick={() => this.addToCart(mock.data.products[3])}/>
-                            </button>
-                        </div>
+                        </Link>
+                        <button className="card-button flex-center absolute bottom-16 right-8 p-3 rounded-full z-[99]">
+                            <img src={CartIcon} alt="cart-icon" onClick={() => this.quickAddToCart({product: this.props.product, quantity: 1, selectionIndices: []})}/>
+                        </button>
                     </div>
-                </Link>
+                </div>
             )
         }
     }

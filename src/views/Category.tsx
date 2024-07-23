@@ -18,9 +18,20 @@ export default class Category extends Component<CategoryProps> {
                     {/* Mock data to test the layout for now */}
                     {
                         file.data.products.map((product, index) => {
-                            return (
-                                <Card key={index} title={product.name} price={product.prices[0].amount} imageSource={product.gallery[0]} inStock={product.inStock} id={product.id}/>
-                            )
+                            // Handle rendering all products
+                            if (this.props.variant === "all") {
+                                return (
+                                    <Card key={index} product={product}/>
+                                )
+                            } else {
+                                // Handle rendering products based on the category
+                                if (this.props.variant === product.category) {
+                                    return (
+                                        <Card key={index} product={product}/>
+                                    )
+                                }
+                            }
+                            return null;
                         })
                     }
                 </div>
