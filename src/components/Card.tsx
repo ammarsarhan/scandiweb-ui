@@ -48,8 +48,10 @@ export default class Card extends Component<{product: ProductType}> {
                                 </div>
                             </div>
                         </Link>
-                        <button onClick={() => ctx.addProductToCart({product: this.props.product, quantity: 1, selectionIndices: [], listIndex: ctx.cartItems.length + 1})} className="card-button flex-center absolute bottom-16 right-8 p-3 rounded-full z-[99]">
-                            <img src={CartIcon} alt="cart-icon"/>
+                        <button 
+                            onClick={() => ctx.addProductToCart({product: this.props.product, quantity: 1, selectionIndices: [], listIndex: ctx.cartItems.length + 1})} 
+                            className="card-button flex-center absolute bottom-16 right-6 p-3 rounded-full z-[99]">
+                                <img src={CartIcon} alt="cart-icon"/>
                         </button>
                     </div>
                 </div>

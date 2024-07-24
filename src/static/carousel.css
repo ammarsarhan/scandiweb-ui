@@ -1,0 +1,35 @@
+div.carousel {
+    display: flex;
+}
+
+div.carousel-images {
+    display: flex;
+    row-gap: 1rem;
+}
+
+button.carousel-image-wrapper {
+    height: 4rem;
+    width: 4rem;
+    object-fit: contain;
+}
+
+img.carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+div.active-image {
+    height: 60vh;
+}
+
+div.active-image img {
+    height: 100%;
+    object-fit: contain;
+}
+
+button.index-button {
+    background: #000000BA;
+    position: absolute;
+    padding: 0.1rem 0.1rem;
+}

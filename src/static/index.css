@@ -16,3 +16,12 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+div.parsed * {
+    margin-bottom: 1rem;
+}
+
+div.parsed h1, h2, h3, h4, h5, h6 {
+    margin-top: 1rem;
+    font-weight: 600;
+}
