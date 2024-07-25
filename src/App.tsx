@@ -55,10 +55,12 @@ export default class App extends Component {
         // Add function to add product to cart
         addProductToCart: (item: CartItemType) => {
             let duplicateFlag = false;
-    
+
             // Filling selectionIndices array with 0 (start of attributes index as default)
-            item.selectionIndices = Array(item.product.attributes.length).fill(0);
-    
+            if (JSON.stringify(item.selectionIndices) === JSON.stringify([])) {
+                item.selectionIndices = Array(item.product.attributes.length).fill(0);
+            }
+
             // Checking for duplicates of products in cart already
             this.state.cartItems.map((cartItem, index) => {
                 if (cartItem.product === item.product) {
@@ -70,6 +72,8 @@ export default class App extends Component {
                         newCart[index].quantity += 1;
                         this.setState({cartItems: newCart});
                         
+                        console.log("Found duplicate!")
+
                         duplicateFlag = true;
                     }
                 }

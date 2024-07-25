@@ -2,6 +2,8 @@ import { Component } from 'react';
 import { CartContext, CartContextType } from '@/context/CartContext';
 import { CartItemType } from '@/types/cart';
 
+import Option from '@/components/Option';
+
 export default class CartItem extends Component<CartItemType> {
     static contextType = CartContext;
     ctx = this.context as CartContextType;
@@ -12,6 +14,7 @@ export default class CartItem extends Component<CartItemType> {
     
     decrementQuantity = (index: number) => {
         this.ctx.decrementProduct(index);
+        this.forceUpdate();
     }
 
     render () {
@@ -23,52 +26,7 @@ export default class CartItem extends Component<CartItemType> {
                     {/* First higher-level map through options array */}
                     {this.props.product.attributes.map((element, index) => {
                         const option = JSON.parse(JSON.stringify(element))
-                        const selected = this.props.selectionIndices[index]
-                        /* Conditional rendering to check if options are colors */
-                        if (option.name === 'Color') {                            
-                            return (
-                                /* Second lower-level map through selections array */
-                                <div key={index}>
-                                    <span className='block my-2 text-[#1D1F22] font-light text-sm'>{option.name}:</span>
-                                    <div className='flex flex-wrap items-center gap-2'>
-                                        {option.items.map((selections: object, index: number) => {
-                                            const selection = JSON.parse(JSON.stringify(selections))
-
-                                            // If the index matches the selected index add different border-color
-                                            if (index === selected) {
-                                                return (
-                                                    <div className='border-[1px] border-[#5ECE7B] p-[2px]'>
-                                                        <div className="w-5 h-5" style={{backgroundColor: selection.value}} key={index}></div>
-                                                    </div>
-                                                )
-                                            } else {
-                                                return <div className="w-5 h-5 border-[1px]" style={{backgroundColor: selection.value}} key={index}></div>
-                                            }
-
-                                        })}
-                                    </div>
-                                </div>
-                            )
-                        } else {
-                            /* If not colors then render component normally */
-                            return (
-                                <div key={index}>
-                                    <span className='block my-2 text-[#1D1F22] font-light text-sm'>{option.name}:</span>
-                                    <div className='flex flex-wrap gap-2'>
-                                        {option.items.map((selections: object, index: number) => {
-                                            const selection = JSON.parse(JSON.stringify(selections))
-
-                                            // If the index matches the selected index add background color and change text color
-                                            if (index === selected) {
-                                                return <div className='border-[1px] p-1 border-black bg-black text-white text-sm' key={index}>{selection.displayValue}</div>
-                                            } else {
-                                                return <div className='border-[1px] p-1 border-black text-sm' key={index}>{selection.displayValue}</div>
-                                            }
-                                        })}
-                                    </div>
-                                </div>
-                            )
-                        }
+                        return <Option key={index} name={option.name} items={option.items} isClickable={false} selected={this.props.selectionIndices[index]}/>
                     })}
                 </div>
                 <div className='flex flex-col items-center px-8'>
