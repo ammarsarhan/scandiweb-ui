@@ -25,6 +25,7 @@ export default class CartDropdown extends Component {
                           <div className='flex flex-col gap-y-12 max-h-96 md:max-h-80 overflow-y-auto'>
                               {
                                 context.cartItems.map((item, index) => {
+                                  console.log(context.cartItems);
                                   return <CartItem key={index} listIndex={index} product={item.product} quantity={item.quantity} selectionIndices={item.selectionIndices}/>
                                 })
                               }

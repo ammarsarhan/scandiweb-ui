@@ -37,25 +37,34 @@ export default class App extends Component {
         },
         // Add function to increment quantity of product
         incrementProduct: (index: number) => {
-            let newCart = this.state.cartItems;
+            let newCart = [...this.state.cartItems];
             newCart[index].quantity += 1;
             this.setState({cartItems: newCart});
         },
         // Add function to decrement quantity of product
         decrementProduct: (index: number) => {
-            let newCart = this.state.cartItems;
-            newCart[index].quantity -= 1;
+            // Create a new array with the current items
+            let newCart = [...this.state.cartItems];
 
-            if (newCart[index].quantity < 1) {
-                newCart.splice(index, 1);
+            const updatedItem = { 
+                ...newCart[index], 
+                quantity: newCart[index].quantity - 1 
+            };
+
+            // If the quantity is less than 1, remove the item
+            if (updatedItem.quantity < 1) {
+                newCart = newCart.filter((_, i) => i !== index);
+            } else {
+                // Otherwise, update the item in the new array
+                newCart[index] = updatedItem;
             }
 
-            this.setState({cartItems: newCart});
+            this.setState({ cartItems: newCart });
         },
         // Add function to add product to cart
         addProductToCart: (item: CartItemType) => {
             let duplicateFlag = false;
-
+            
             // Filling selectionIndices array with 0 (start of attributes index as default)
             if (JSON.stringify(item.selectionIndices) === JSON.stringify([])) {
                 item.selectionIndices = Array(item.product.attributes.length).fill(0);
@@ -71,8 +80,6 @@ export default class App extends Component {
                         let newCart = this.state.cartItems;
                         newCart[index].quantity += 1;
                         this.setState({cartItems: newCart});
-                        
-                        console.log("Found duplicate!")
 
                         duplicateFlag = true;
                     }

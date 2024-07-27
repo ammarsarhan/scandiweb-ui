@@ -19,6 +19,8 @@ export default class Option extends Component<OptionProps> {
         this.props.onOptionChange!(index)
     }
 
+    // Conditional rendering based on isClickable and using a <div> instead of <button> is a better practice 
+    // because it stops user from removing "disabled" attribute in devtools and using button normally
     render () {
         if (this.props.name === "Color") {
             return (

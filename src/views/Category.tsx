@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import Card from '@/components/Card';
 
-import file from '../data.json'
+import file from '@/data.json'
 
 type CategoryProps = {
     variant: string
@@ -15,7 +15,6 @@ export default class Category extends Component<CategoryProps> {
             <main className='px-16 py-12'>
                 <h1 className='text-4xl font-light my-8'>{label}</h1>
                 <div className='mt-16 overflow-visible grid lg:grid-cols-2 xl:grid-cols-3 gap-x-10 gap-y-16 2xl:gap-28'>
-                    {/* Mock data to test the layout for now */}
                     {
                         file.data.products.map((product, index) => {
                             // Handle rendering all products

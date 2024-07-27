@@ -30,9 +30,9 @@ export default class Details extends Component<DetailsProps, DetailsState> {
 
     state = {
         product: {} as ProductType,
+        selectionIndices: [] as number[],
         loading: true,
         error: null,
-        selectionIndices: []
     }
 
     componentDidMount(): void {
@@ -43,22 +43,17 @@ export default class Details extends Component<DetailsProps, DetailsState> {
 
     handleAddClicked = () => {
         const ctx = this.context as CartContextType;
-        // const currentSelection = this.state.selectionIndices;
-        console.log("Current array:", ctx.cartItems);
-
-        const product = {product: this.state.product, quantity: 1, selectionIndices: [1], listIndex: ctx.cartItems.length};
-        console.log("Product to add:", product);
-
+        const temp = [...this.state.selectionIndices]; // Copying array to avoid passing byRef
+        const product = {product: this.state.product, quantity: 1, selectionIndices: temp, listIndex: ctx.cartItems.length};
+        
         ctx.addProductToCart(product)
     }
 
     handleOptionRecieved = (index: number, option: number) => {
-        console.log(index, option);
-
-        // let newIndices = this.state.selectionIndices;
-        // newIndices[option] = index;
+        let temp = this.state.selectionIndices;
+        temp[index] = option;
         
-        // this.setState({selectionIndices: newIndices});
+        this.setState({selectionIndices: temp});
     }
 
     render () {
@@ -115,7 +110,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
                                         items={option.items} 
                                         isClickable={true}
                                         selected={0}
-                                        onOptionChange={(selection) => this.handleOptionRecieved(selection, index)}
+                                        onOptionChange={(selection) => this.handleOptionRecieved(index, selection)}
                                     />
                         })
                     }
