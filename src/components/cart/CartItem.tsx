@@ -38,7 +38,7 @@ export default class CartItem extends Component<CartItemType> {
                             </button>
                             <span className='flex-grow flex-center'>{context.cartItems[this.props.listIndex].quantity}</span>
                             {/* Decrement button copied from figma design */}
-                            <button onClick={() => context.decrementProduct(this.props.listIndex)}>
+                            <button onClick={() => {context.decrementProduct(this.props.listIndex)}}>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <rect x="0.5" y="0.5" width="23" height="23" stroke="#1D1F22"/>
                                     <path d="M8 12H16" stroke="#1D1F22" strokeLinecap="round" strokeLinejoin="round"/>

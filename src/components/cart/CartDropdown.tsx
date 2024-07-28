@@ -4,6 +4,12 @@ import { CartContext } from '@/context/CartContext'
 import CartItem from '@/components/cart/CartItem'
 
 export default class CartDropdown extends Component {
+
+  // Implement logic to check for cart item length and place order
+  handlePlaceOrder = () => {
+    console.log("Place order...");
+  }
+
   render () {
     return (
       // Remove local state and use Context API to globalize dropdown state
@@ -25,7 +31,6 @@ export default class CartDropdown extends Component {
                           <div className='flex flex-col gap-y-12 max-h-96 md:max-h-80 overflow-y-auto'>
                               {
                                 context.cartItems.map((item, index) => {
-                                  console.log(context.cartItems);
                                   return <CartItem key={index} listIndex={index} product={item.product} quantity={item.quantity} selectionIndices={item.selectionIndices}/>
                                 })
                               }
@@ -34,7 +39,11 @@ export default class CartDropdown extends Component {
                             <span>Total</span>
                             <span>${context.getTotal().toFixed(2)}</span>
                           </div>
-                          <button className='text-center font-medium block w-full px-16 py-4 my-4 text-white bg-[#5ECE7B]'>PLACE ORDER</button>
+                          {
+                            context.cartItems.length === 0 ?
+                            <button className='text-center font-medium block w-full px-16 py-4 my-4 text-white bg-[#7d7d7d]' disabled>PLACE ORDER</button> :
+                            <button className='text-center font-medium block w-full px-16 py-4 my-4 text-white bg-[#5ECE7B]' onClick={this.handlePlaceOrder}>PLACE ORDER</button>
+                          }
                       </div>
                       {/* Overlay to gray out */}
                       <div className="overlay fixed w-full h-full bg-black opacity-20 z-30" onClick={context.switchDropdownActive}></div>

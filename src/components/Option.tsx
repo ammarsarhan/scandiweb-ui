@@ -9,14 +9,23 @@ type OptionProps = {
 }
 
 export default class Option extends Component<OptionProps> {
-    // Find a way to link state to props
     state = {
-        selected: this.props.selected // Not reactive!
+        selected: this.props.selected
+    }
+
+    // If props updated, assign them to state!
+    componentDidUpdate(previous: OptionProps) {
+        if (previous.selected !== this.props.selected) {
+            this.setState({ selected: this.props.selected });
+        }
     }
 
     handleOptionClicked = (index: number) => {
-        this.setState({selected: index})
-        this.props.onOptionChange!(index)
+        this.setState({selected: index});
+
+        if (this.props.onOptionChange) {
+            this.props.onOptionChange(index);
+        }
     }
 
     // Conditional rendering based on isClickable and using a <div> instead of <button> is a better practice 
