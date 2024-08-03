@@ -4,12 +4,6 @@ import { CartContext } from '@/context/CartContext'
 import CartItem from '@/components/cart/CartItem'
 
 export default class CartDropdown extends Component {
-
-  // Implement logic to check for cart item length and place order
-  handlePlaceOrder = () => {
-    console.log("Place order...");
-  }
-
   render () {
     return (
       // Remove local state and use Context API to globalize dropdown state
@@ -42,7 +36,7 @@ export default class CartDropdown extends Component {
                           {
                             context.cartItems.length === 0 ?
                             <button className='text-center font-medium block w-full px-16 py-4 my-4 text-white bg-[#7d7d7d]' disabled>PLACE ORDER</button> :
-                            <button className='text-center font-medium block w-full px-16 py-4 my-4 text-white bg-[#5ECE7B]' onClick={this.handlePlaceOrder}>PLACE ORDER</button>
+                            <button className='text-center font-medium block w-full px-16 py-4 my-4 text-white bg-[#5ECE7B]' onClick={context.placeOrder}>PLACE ORDER</button>
                           }
                       </div>
                       {/* Overlay to gray out */}

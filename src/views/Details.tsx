@@ -35,10 +35,57 @@ export default class Details extends Component<DetailsProps, DetailsState> {
         error: null,
     }
 
+    fetchProduct = async () => {
+        const url = 'http://localhost:8080';
+        const query = `{ 
+                        product(id: "${this.id}") { 
+                            id
+                            name
+                            inStock
+                            description
+                            gallery
+                            category 
+                            brand
+                            __typename
+                            attributes {
+                                id
+                                items {
+                                    displayValue
+                                    value
+                                    id
+                                }
+                                name
+                                type
+                            }
+                            prices {
+                                amount
+                                currency {
+                                    label
+                                    symbol
+                                }
+                            }
+                        }
+                    }`;
+        fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ query })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const product = data.data.product;
+            this.setState({product: product, selectionIndices: Array(product.attributes.length).fill(0), loading: false});
+        })
+        .catch(error => {
+          console.error('Fetch error:', error);
+        });
+    }
+    
     componentDidMount(): void {
         // Fetch product details and handle loading/error states
-        const data = file.data.products.find((product: ProductType) => product.id === this.id) as ProductType;
-        this.setState({ product: data, loading: false, selectionIndices: Array(data.attributes.length).fill(0) });
+        this.fetchProduct();
     }
 
     handleAddClicked = () => {
@@ -58,11 +105,11 @@ export default class Details extends Component<DetailsProps, DetailsState> {
 
     render () {
         if (this.state.loading) {
-            return <div>Component to handle loading!</div>
+            return <div>Loading...</div>
         }
 
         if (this.state.error) {
-            return <div>Component to handle error!</div>
+            return <div>An error has occurred!</div>
         }
 
         if (!this.state.product.inStock) {

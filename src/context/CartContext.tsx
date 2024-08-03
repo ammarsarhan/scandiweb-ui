@@ -13,6 +13,7 @@ const initialCartSettings = {
     addProductToCart: () => {},
     incrementProduct: () => {},
     decrementProduct: () => {},
+    placeOrder: () => {},
 }
 
 export type CartContextType = {
@@ -24,6 +25,7 @@ export type CartContextType = {
     addProductToCart: (item: CartItemType) => void;
     incrementProduct: (index: number) => void;
     decrementProduct: (index: number) => void;
+    placeOrder: () => void;
 }
 
 export const CartContext = createContext(initialCartSettings as CartContextType);
