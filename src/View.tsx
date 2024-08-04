@@ -14,15 +14,15 @@ export default class View extends Component {
       // v6 would not allow us to useParams()
       <Switch>
         <Route exact path="/">
-          <Redirect to="/category/all"/>
+          <Redirect to="/all"/>
         </Route>
-        <Route exact path="/category/all">
+        <Route exact path="/all">
           <Category variant='all'/>
         </Route>
-        <Route exact path="/category/clothes">
+        <Route exact path="/clothes">
           <Category variant='clothes'/>
         </Route>
-        <Route exact path="/category/tech">
+        <Route exact path="/tech">
           <Category variant='tech'/>
         </Route>
         <Route exact path="/details/:id" component={Details}/>

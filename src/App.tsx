@@ -121,14 +121,17 @@ export default class App extends Component {
                 })
             })
             .catch(error => {
-              console.error('Fetch error:', error);
-            });
+              console.error('Fetch:', error);
+              alert("Failed to create order. Please try again later.")
+              return;
+            });            
 
+            // Place a modal to indicate to user that order was placed
+            alert("Created Order Successfully!")
+            
             // Clear cart
             this.setState({cartItems: []});
             this.setState({dropdownActive: false});
-
-            // TO-DO: Place a modal to indicate to user that order was placed
         },
     }
 

@@ -9,8 +9,6 @@ import ReactHtmlParser from 'react-html-parser'
 import Carousel from '@/components/Carousel';
 import Option from '@/components/Option'
 
-import file from '../data.json'
-
 interface MatchParams {
     id: string;
 }
@@ -146,7 +144,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
         return (
             <div className="w-full lg:grid lg:grid-cols-2 px-16 py-12">
                 <Carousel images={this.state.product.gallery}/>
-                <div className='max-w-80 flex flex-col gap-y-6 mt-10 lg:mt-0'>
+                <div className='w-full sm:w-auto sm:max-w-80 flex flex-col gap-y-6 mt-10 lg:mt-0'>
                     <h1 className='text-2xl font-medium block'>{this.state.product.name}</h1>
                     {
                         this.state.product.attributes.map((element, index) => {
