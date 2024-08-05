@@ -104,7 +104,7 @@ export default class App extends Component {
             // GraphQL does not handle \ well, so we need to escape them
             products = products.replace(/\\/g, '\\\\\\\\');
 
-            const url = 'http://localhost:8080';
+            const url = 'http://18.194.213.95/api/';
 
             const mutation = 
             `mutation {
@@ -122,16 +122,11 @@ export default class App extends Component {
             })
             .catch(error => {
               console.error('Fetch:', error);
-              alert("Failed to create order. Please try again later.")
               return;
             });            
 
-            // Place a modal to indicate to user that order was placed
-            alert("Created Order Successfully!")
-            
-            // Clear cart
-            this.setState({cartItems: []});
-            this.setState({dropdownActive: false});
+            // Clear cart and reset dropdown
+            this.setState({cartItems: [], dropdownActive: false});
         },
     }
 

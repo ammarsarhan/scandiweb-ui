@@ -34,7 +34,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
     }
 
     fetchProduct = async () => {
-        const url = 'http://localhost:8080';
+        const url = 'http://18.194.213.95/api/';
         const query = `{ 
                         product(id: "${this.id}") { 
                             id
@@ -78,6 +78,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
         })
         .catch(error => {
           console.error('Fetch error:', error);
+          this.setState({error: error, loading: false});
         });
     }
     
@@ -103,11 +104,11 @@ export default class Details extends Component<DetailsProps, DetailsState> {
 
     render () {
         if (this.state.loading) {
-            return <div>Loading...</div>
+            return <div className='p-10'>Loading...</div>
         }
 
         if (this.state.error) {
-            return <div>An error has occurred!</div>
+            return <div className='p-10'>An error has occurred!</div>
         }
 
         if (!this.state.product.inStock) {

@@ -7,11 +7,13 @@ type CategoryProps = {
 
 export default class Category extends Component<CategoryProps> {
     state = {
-        products: []
+        products: [],
+        loading: true,
+        error: null
     }
 
     fetchProducts = async () => {
-        const url = 'http://localhost:8080';
+        const url = 'http://18.194.213.95/api/';
         const query = `{ 
                         products (category: "${this.props.variant}") { 
                             id
@@ -43,19 +45,20 @@ export default class Category extends Component<CategoryProps> {
                     }`;
         
         fetch(url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ query })
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ query })
         })
         .then(response => response.json())
         .then(data => {
-          const products = data.data.products;
-          this.setState({products: products})
+            const products = data.data.products;
+            this.setState({products: products, loading: false});
         })
         .catch(error => {
-          console.error('Fetch error:', error);
+            console.log(error);
+            this.setState({loading: false, error: error});
         });
     }
 
@@ -70,6 +73,14 @@ export default class Category extends Component<CategoryProps> {
     }
 
     render () {
+        if (this.state.loading) {
+            return <div className='p-10'>Loading...</div>
+        }
+
+        if (this.state.error) {
+            return <div className='p-10'>An error has occurred!</div>
+        }
+
         // Capitalize the first letter of the variant
         const label = this.props.variant.charAt(0).toUpperCase() + this.props.variant.slice(1);
         return (
