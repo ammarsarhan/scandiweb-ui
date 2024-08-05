@@ -13,7 +13,7 @@ export default class Category extends Component<CategoryProps> {
     }
 
     fetchProducts = async () => {
-        const url = 'http://18.194.213.95/api/';
+        const url = 'https://18.194.213.95/api/';
         const query = `{ 
                         products (category: "${this.props.variant}") { 
                             id
