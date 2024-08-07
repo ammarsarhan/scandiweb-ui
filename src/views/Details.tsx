@@ -134,7 +134,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
                             <span className='text-xl my-2'>{this.state.product.prices[0].currency.symbol}{this.state.product.prices[0].amount.toFixed(2)}</span>
                         </div>
                         <button disabled className='py-4 text-white bg-[#7d7d7d]' data-testid='add-to-cart'>ADD TO CART</button>
-                        <div className='parsed'>
+                        <div className='parsed' data-testid='product-description'>
                             {ReactHtmlParser(this.state.product.description)}
                         </div>
                     </div>
