@@ -104,7 +104,7 @@ export default class App extends Component {
             // GraphQL does not handle \ well, so we need to escape them
             products = products.replace(/\\/g, '\\\\\\\\');
 
-            const url = 'http://api.ammaryasser.me/api/';
+            const url = 'https://api.ammaryasser.me/api/';
 
             const mutation = 
             `mutation {

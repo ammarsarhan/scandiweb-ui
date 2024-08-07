@@ -34,7 +34,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
     }
 
     fetchProduct = async () => {
-        const url = 'http://api.ammaryasser.me/api/';
+        const url = 'https://api.ammaryasser.me/api/';
         const query = `{ 
                         product(id: "${this.id}") { 
                             id
