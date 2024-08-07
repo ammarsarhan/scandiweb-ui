@@ -13,7 +13,8 @@ export default class Category extends Component<CategoryProps> {
     }
 
     fetchProducts = async () => {
-        const url = 'https://18.194.213.95/api/';
+        const url = 'https://api.ammaryasser.me/api/';
+        // Query could probably be handled better to fetch less data but this works for now
         const query = `{ 
                         products (category: "${this.props.variant}") { 
                             id
