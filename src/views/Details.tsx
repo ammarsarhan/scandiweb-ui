@@ -34,7 +34,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
     }
 
     fetchProduct = async () => {
-        const url = 'https://api.ammaryasser.me/api/';
+        const url = 'http://127.0.0.1/api/';
         const query = `{ 
                         product(id: "${this.id}") { 
                             id
@@ -133,7 +133,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
                             <h3 className='my-2'>PRICE:</h3>
                             <span className='text-xl my-2'>{this.state.product.prices[0].currency.symbol}{this.state.product.prices[0].amount.toFixed(2)}</span>
                         </div>
-                        <button disabled className='py-4 text-white bg-[#7d7d7d]'>ADD TO CART</button>
+                        <button disabled className='py-4 text-white bg-[#7d7d7d]' data-testid='add-to-cart'>ADD TO CART</button>
                         <div className='parsed'>
                             {ReactHtmlParser(this.state.product.description)}
                         </div>
@@ -167,8 +167,9 @@ export default class Details extends Component<DetailsProps, DetailsState> {
                     <button 
                         className='py-4 text-white bg-[#5ECE7B]'
                         onClick={this.handleAddClicked}
+                        data-testid='add-to-cart'
                     >ADD TO CART</button>
-                    <div className='parsed'>
+                    <div className='parsed' data-testid='product-description'>
                         {ReactHtmlParser(this.state.product.description)}
                     </div>
                 </div>

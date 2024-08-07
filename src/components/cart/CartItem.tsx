@@ -22,7 +22,7 @@ export default class CartItem extends Component<CartItemType> {
                         </div>
                         <div className='flex flex-col items-center px-8'>
                             {/* Increment button copied from figma design */}
-                            <button onClick={() => context.incrementProduct(this.props.listIndex)}>
+                            <button onClick={() => context.incrementProduct(this.props.listIndex)} data-testid='cart-item-amount-increase'>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clipPath="url(#clip0_92234_46)">
                                         <path d="M12 8V16" stroke="#1D1F22" strokeLinecap="round" strokeLinejoin="round"/>
@@ -36,9 +36,9 @@ export default class CartItem extends Component<CartItemType> {
                                     </defs>
                                 </svg>
                             </button>
-                            <span className='flex-grow flex-center'>{context.cartItems[this.props.listIndex].quantity}</span>
+                            <span className='flex-grow flex-center' data-testid='cart-item-amount'>{context.cartItems[this.props.listIndex].quantity}</span>
                             {/* Decrement button copied from figma design */}
-                            <button onClick={() => {context.decrementProduct(this.props.listIndex)}}>
+                            <button onClick={() => {context.decrementProduct(this.props.listIndex)}} data-testid='cart-item-amount-decrease'>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <rect x="0.5" y="0.5" width="23" height="23" stroke="#1D1F22"/>
                                     <path d="M8 12H16" stroke="#1D1F22" strokeLinecap="round" strokeLinejoin="round"/>

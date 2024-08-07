@@ -32,7 +32,7 @@ export default class Carousel extends Component<CarouselProps, CarouselState> {
 
     render () {
         return (
-            <div className="carousel flex-center gap-y-6 flex-col lg:justify-normal lg:items-start lg:flex-row">
+            <div data-testid='product-gallery' className="carousel flex-center gap-y-6 flex-col lg:justify-normal lg:items-start lg:flex-row">
                 <div className="carousel-images flex-row flex-wrap lg:flex-col gap-x-4">
                     {
                         this.props.images.map((image, index) => {

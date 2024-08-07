@@ -6,6 +6,7 @@ import { ProductType } from "@/types/product";
 import { CartContext, CartContextType } from "@/context/CartContext"
 
 import { Link } from "react-router-dom";
+import { convertToKebabCase } from "@/utils/parse";
 
 export default class Card extends Component<{product: ProductType}> {
     static contextType = CartContext;
@@ -15,7 +16,7 @@ export default class Card extends Component<{product: ProductType}> {
         if (!this.props.product.inStock) {
             return (
                 <Link to={`/details/${this.props.product.id}`}>
-                    <div className="w-full h-full flex-center">
+                    <div className="w-full h-full flex-center" data-testid={`product-${convertToKebabCase(this.props.product.name)}`}>
                         <div className="card out-of-stock w-full sm:w-96 p-5 sm:p-3">
                             {/* Out of stock overlay wrapper */}
                             <div className="w-full h-80 relative">
@@ -37,7 +38,7 @@ export default class Card extends Component<{product: ProductType}> {
             const ctx = this.context as CartContextType;
             // Render card component with full functionality if not out of stock
             return (
-                <div className="flex-center h-full w-full">
+                <div className="flex-center h-full w-full" data-testid={`product-${convertToKebabCase(this.props.product.name)}`}>
                     <div className="card relative p-3">
                         <Link to={`/details/${this.props.product.id}`} className="block w-full sm:w-96 p-0">
                             <div className="w-full sm:w-96">
@@ -50,7 +51,8 @@ export default class Card extends Component<{product: ProductType}> {
                         </Link>
                         <button 
                             onClick={() => ctx.addProductToCart({product: this.props.product, quantity: 1, selectionIndices: [], listIndex: ctx.cartItems.length + 1})} 
-                            className="card-button flex-center absolute bottom-16 right-6 p-3 rounded-full z-[99]">
+                            className="card-button flex-center absolute bottom-16 right-6 p-3 rounded-full z-[99]"
+                            data-testid='cart-btn'>
                                 <img src={CartIcon} alt="cart-icon"/>
                         </button>
                     </div>

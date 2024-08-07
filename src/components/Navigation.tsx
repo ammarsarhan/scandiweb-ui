@@ -24,6 +24,34 @@ export default class Navigation extends Component<{}, NavigationState> {
         }
     }
 
+    componentDidMount(): void {
+        const links = document.querySelectorAll('a.link');
+        links.forEach((link) => {
+            link.setAttribute("data-testid", "category-link");
+
+            if (link.classList.contains("active")) {
+                link.setAttribute("data-testid", "active-category-link");
+            }
+        })
+
+        // Handle resizing window for responsivity
+        const query = window.matchMedia('(min-width: 768px)');
+        
+        query.addEventListener("change", () => {
+            if (query.matches) {
+                document.body.style.overflow = 'auto';
+            }
+        })
+    }
+    
+    componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<NavigationState>, snapshot?: any): void {
+        // Handle links rendered when page is resized for responsivity
+        const links = document.querySelectorAll('a.link');
+        links.forEach((link) => {
+            link.setAttribute("data-testid", "category-link");
+        })
+    }
+
     render () {
         return (
             <>
@@ -33,19 +61,19 @@ export default class Navigation extends Component<{}, NavigationState> {
 
                     {/* Responsivity needs a bit of refining but works for now */}
                     <div className='hidden md:flex'>
-                        <NavLink to="/all">ALL</NavLink>
-                        <NavLink to="/clothes">CLOTHES</NavLink>
-                        <NavLink to="/tech">TECH</NavLink>
+                        <NavLink to="/all" className="link">ALL</NavLink>
+                        <NavLink to="/clothes" className="link">CLOTHES</NavLink>
+                        <NavLink to="/tech" className="link">TECH</NavLink>
                     </div>
-                    <NavLink to="/" className="home absolute left-[calc(50%-20.5px)]"><img src={Logo} alt="Logo"/></NavLink>
+                    <NavLink to="/" className="home absolute left-[calc(50%-20.5px)] link"><img src={Logo} alt="Logo"/></NavLink>
                     <Trigger/>
                 </nav>
                 {
                     this.state.isNavigationActive && 
-                    <div className='w-screen h-screen fixed bg-white z-50 flex flex-col items-center p-5'>
-                        <NavLink to="/all" className="w-full" onClick={this.switchNavigationOpen}>ALL</NavLink>
-                        <NavLink to="/clothes" className="w-full" onClick={this.switchNavigationOpen}>CLOTHES</NavLink>
-                        <NavLink to="/tech" className="w-full" onClick={this.switchNavigationOpen}>TECH</NavLink>
+                    <div className='md:hidden w-screen h-screen fixed bg-white z-50 flex flex-col items-center p-5'>
+                        <NavLink to="/all" className="w-full link" onClick={this.switchNavigationOpen}>ALL</NavLink>
+                        <NavLink to="/clothes" className="w-full link" onClick={this.switchNavigationOpen}>CLOTHES</NavLink>
+                        <NavLink to="/tech" className="w-full link" onClick={this.switchNavigationOpen}>TECH</NavLink>
                     </div>
                 }
             </>
