@@ -20,6 +20,7 @@ type DetailsState = {
     loading: boolean;
     error: any | null;
     selectionIndices: number[];
+    addToCartEnabled: boolean;
 }
 
 export default class Details extends Component<DetailsProps, DetailsState> {
@@ -31,6 +32,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
         selectionIndices: [] as number[],
         loading: true,
         error: null,
+        addToCartEnabled: false
     }
 
     fetchProduct = async () => {
@@ -99,7 +101,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
         let temp = this.state.selectionIndices;
         temp[index] = option;
         
-        this.setState({selectionIndices: temp});
+        this.setState({selectionIndices: temp, addToCartEnabled: true});
     }
 
     render () {
@@ -111,6 +113,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
             return <div className='p-10'>An error has occurred! <br/> {this.state.error}</div>
         }
 
+        // Out of stock
         if (!this.state.product.inStock) {
             return (
                 <div className="w-full lg:grid lg:grid-cols-2 px-16 py-12">
@@ -126,6 +129,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
                                             items={option.items} 
                                             isClickable={true}
                                             selected={0}
+                                            onOptionChange={(selection) => this.handleOptionRecieved(index, selection)}
                                         />
                             })
                         }
@@ -133,7 +137,15 @@ export default class Details extends Component<DetailsProps, DetailsState> {
                             <h3 className='my-2'>PRICE:</h3>
                             <span className='text-xl my-2'>{this.state.product.prices[0].currency.symbol}{this.state.product.prices[0].amount.toFixed(2)}</span>
                         </div>
-                        <button disabled className='py-4 text-white bg-[#7d7d7d]' data-testid='add-to-cart'>ADD TO CART</button>
+                        {
+                            this.state.addToCartEnabled ?
+                            <button 
+                                className='py-4 text-white bg-[#5ECE7B]'
+                                onClick={this.handleAddClicked}
+                                data-testid='add-to-cart'
+                            >ADD TO CART</button> :
+                            <button disabled className='py-4 text-white bg-[#7d7d7d]' data-testid='add-to-cart'>ADD TO CART</button>
+                        }
                         <div className='parsed' data-testid='product-description'>
                             {ReactHtmlParser(this.state.product.description)}
                         </div>
@@ -142,38 +154,42 @@ export default class Details extends Component<DetailsProps, DetailsState> {
             )
         }
 
-        return (
-            <div className="w-full lg:grid lg:grid-cols-2 px-16 py-12">
-                <Carousel images={this.state.product.gallery}/>
-                <div className='w-full sm:w-auto sm:max-w-80 flex flex-col gap-y-6 mt-10 lg:mt-0'>
-                    <h1 className='text-2xl font-medium block'>{this.state.product.name}</h1>
-                    {
-                        this.state.product.attributes.map((element, index) => {
-                            const option = JSON.parse(JSON.stringify(element))
-                            return <Option 
-                                        key={index} 
-                                        name={option.name} 
-                                        items={option.items} 
-                                        isClickable={true}
-                                        selected={0}
-                                        onOptionChange={(selection) => this.handleOptionRecieved(index, selection)}
-                                    />
-                        })
-                    }
-                    <div className='font-semibold'>
-                        <h3 className='my-2'>PRICE:</h3>
-                        <span className='text-xl my-2'>{this.state.product.prices[0].currency.symbol}{this.state.product.prices[0].amount.toFixed(2)}</span>
-                    </div>
-                    <button 
-                        className='py-4 text-white bg-[#5ECE7B]'
-                        onClick={this.handleAddClicked}
-                        data-testid='add-to-cart'
-                    >ADD TO CART</button>
-                    <div className='parsed' data-testid='product-description'>
-                        {ReactHtmlParser(this.state.product.description)}
+        // In stock
+        if (this.state.product.inStock) {
+            this.setState({addToCartEnabled: true});
+            return (
+                <div className="w-full lg:grid lg:grid-cols-2 px-16 py-12">
+                    <Carousel images={this.state.product.gallery}/>
+                    <div className='w-full sm:w-auto sm:max-w-80 flex flex-col gap-y-6 mt-10 lg:mt-0'>
+                        <h1 className='text-2xl font-medium block'>{this.state.product.name}</h1>
+                        {
+                            this.state.product.attributes.map((element, index) => {
+                                const option = JSON.parse(JSON.stringify(element))
+                                return <Option 
+                                            key={index} 
+                                            name={option.name} 
+                                            items={option.items} 
+                                            isClickable={true}
+                                            selected={0}
+                                            onOptionChange={(selection) => this.handleOptionRecieved(index, selection)}
+                                        />
+                            })
+                        }
+                        <div className='font-semibold'>
+                            <h3 className='my-2'>PRICE:</h3>
+                            <span className='text-xl my-2'>{this.state.product.prices[0].currency.symbol}{this.state.product.prices[0].amount.toFixed(2)}</span>
+                        </div>
+                        <button 
+                            className='py-4 text-white bg-[#5ECE7B]'
+                            onClick={this.handleAddClicked}
+                            data-testid='add-to-cart'
+                        >ADD TO CART</button>
+                        <div className='parsed' data-testid='product-description'>
+                            {ReactHtmlParser(this.state.product.description)}
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        }
     }
 }

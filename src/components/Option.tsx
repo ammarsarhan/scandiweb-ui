@@ -51,7 +51,7 @@ export default class Option extends Component<OptionProps> {
                                 // Cart item option NOT clickable
                                 return (
                                     <div className='border-[1px] border-[#5ECE7B] p-[2px]'>
-                                        <div className="w-5 h-5" style={{backgroundColor: selection.value}} key={index}></div>
+                                        <div className="w-5 h-5" style={{backgroundColor: selection.value}} key={index} data-testid={`cart-item-attribute-${convertToKebabCase(this.props.name)}-${selection.displayValue}-selected`}></div>
                                     </div>
                                 )
                             } else {
