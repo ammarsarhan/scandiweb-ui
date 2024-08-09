@@ -104,11 +104,11 @@ export default class Details extends Component<DetailsProps, DetailsState> {
 
     render () {
         if (this.state.loading) {
-            return <div className='p-10'>Loading...</div>
+            return <></>
         }
 
         if (this.state.error) {
-            return <div className='p-10'>An error has occurred!</div>
+            return <div className='p-10'>An error has occurred! <br/> {this.state.error}</div>
         }
 
         if (!this.state.product.inStock) {

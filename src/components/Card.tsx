@@ -15,7 +15,7 @@ export default class Card extends Component<{product: ProductType}> {
         // Render card component without functionality if out of stock
         if (!this.props.product.inStock) {
             return (
-                <Link to={`/details/${this.props.product.id}`}>
+                <Link to={`/product/${this.props.product.id}`}>
                     <div className="w-full h-full flex-center" data-testid={`product-${convertToKebabCase(this.props.product.name)}`}>
                         <div className="card out-of-stock w-full sm:w-96 p-5 sm:p-3">
                             {/* Out of stock overlay wrapper */}
@@ -40,7 +40,7 @@ export default class Card extends Component<{product: ProductType}> {
             return (
                 <div className="flex-center h-full w-full" data-testid={`product-${convertToKebabCase(this.props.product.name)}`}>
                     <div className="card relative p-3">
-                        <Link to={`/details/${this.props.product.id}`} className="block w-full sm:w-96 p-0">
+                        <Link to={`/product/${this.props.product.id}`} className="block w-full sm:w-96 p-0">
                             <div className="w-full sm:w-96">
                                 <img src={this.props.product.gallery[0]} alt={`${this.props.product.name}-image`} className="w-full h-80 object-contain"/>
                                 <div className="mt-6 flex flex-col gap-1">

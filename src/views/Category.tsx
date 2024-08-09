@@ -75,11 +75,11 @@ export default class Category extends Component<CategoryProps> {
 
     render () {
         if (this.state.loading) {
-            return <div className='p-10'>Loading...</div>
+            return <></>
         }
 
         if (this.state.error) {
-            return <div className='p-10'>An error has occurred!</div>
+            return <div className='p-10'>An error has occurred! <br/> {this.state.error}</div>
         }
 
         // Capitalize the first letter of the variant

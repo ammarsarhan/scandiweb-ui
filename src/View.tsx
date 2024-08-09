@@ -3,11 +3,24 @@ import '@/static/index.css';
 import { Component } from 'react';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom' 
 
 import Category from "@/views/Category";
 import Details from "@/views/Details";
 
-export default class View extends Component {
+class View extends Component<RouteComponentProps> {
+  componentDidUpdate(prevProps: any) {
+    if (this.props.location !== prevProps.location) {
+      console.log(`Route changed from ${prevProps.location.pathname} to ${this.props.location.pathname}`);
+
+      const links = document.querySelectorAll('a.link');
+      links.forEach(link => {
+        const match = link.getAttribute("href") === this.props.location.pathname;
+        match ? link.setAttribute("data-testid", "active-category-link") : link.setAttribute("data-testid", "category-link");
+      })
+    }
+  }
+
   render () {
     return (
       // Setting up routing with react-router-dom@5.3.3
@@ -15,9 +28,6 @@ export default class View extends Component {
       // v6 would not allow us to useParams()
       <Switch>
         <Route exact path="/">
-          <Redirect to="/all"/>
-        </Route>
-        <Route exact path="/all">
           <Category variant='all'/>
         </Route>
         <Route exact path="/clothes">
@@ -26,7 +36,7 @@ export default class View extends Component {
         <Route exact path="/tech">
           <Category variant='tech'/>
         </Route>
-        <Route exact path="/details/:id" component={Details}/>
+        <Route exact path="/product/:id" component={Details}/>
         {/* Handle 404 */}
         <Route path="*">
           <div className='h-[80vh] flex-center'>
@@ -37,3 +47,5 @@ export default class View extends Component {
     );
   }
 }
+
+export default withRouter(View);
