@@ -35,8 +35,8 @@ export default class CartDropdown extends Component {
                           </div>
                           {
                             context.cartItems.length === 0 ?
-                            <button className='text-center font-medium block w-full px-16 py-4 my-4 text-white bg-[#7d7d7d]' disabled>PLACE ORDER</button> :
-                            <button className='text-center font-medium block w-full px-16 py-4 my-4 text-white bg-[#5ECE7B]' onClick={context.placeOrder}>PLACE ORDER</button>
+                            <button className='text-center font-medium block w-full px-16 py-4 my-4 text-white bg-[#7d7d7d]' disabled data-testid="place-order-btn">PLACE ORDER</button> :
+                            <button className='text-center font-medium block w-full px-16 py-4 my-4 text-white bg-[#5ECE7B]' onClick={context.placeOrder} data-testid="place-order-btn">PLACE ORDER</button>
                           }
                       </div>
                       {/* Overlay to gray out */}
