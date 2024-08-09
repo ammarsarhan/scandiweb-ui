@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { convertToKebabCase } from '@/utils/parse'
+import { capitalizeFirstLetter, convertToKebabCase } from '@/utils/parse'
 
 type OptionProps = {
     name: string;
@@ -43,7 +43,7 @@ export default class Option extends Component<OptionProps> {
                             if (index === this.state.selected) {
                                 if (this.props.isClickable) {
                                     return (
-                                        <button data-testid={`product-attribute-${convertToKebabCase(this.props.name)}-${convertToKebabCase(selection.displayValue)}`} onClick={() => this.handleOptionClicked(index)} className='border-[1px] border-[#5ECE7B] p-[2px]'>
+                                        <button data-testid={`product-attribute-${convertToKebabCase(this.props.name)}-${capitalizeFirstLetter(convertToKebabCase(selection.displayValue))}`} onClick={() => this.handleOptionClicked(index)} className='border-[1px] border-[#5ECE7B] p-[2px]'>
                                             <div className="w-5 h-5" style={{backgroundColor: selection.value}} key={index}></div>
                                         </button>
                                     )
@@ -56,13 +56,13 @@ export default class Option extends Component<OptionProps> {
                                 )
                             } else {
                                 if (this.props.isClickable) {
-                                    return <button data-testid={`product-attribute-${convertToKebabCase(this.props.name)}-${convertToKebabCase(selection.displayValue)}`} onClick={() => this.handleOptionClicked(index)} className="w-5 h-5 border-[1px]" style={{backgroundColor: selection.value}} key={index}></button>
+                                    return <button data-testid={`product-attribute-${convertToKebabCase(this.props.name)}-${capitalizeFirstLetter(convertToKebabCase(selection.displayValue))}`} onClick={() => this.handleOptionClicked(index)} className="w-5 h-5 border-[1px]" style={{backgroundColor: selection.value}} key={index}></button>
                                 }
                                 return <div 
                                     className="w-5 h-5 border-[1px]" 
                                     style={{backgroundColor: selection.value}} 
                                     key={index} 
-                                    data-testid={`cart-item-attribute-${convertToKebabCase(this.props.name)}-${convertToKebabCase(selection.displayValue)}`}></div>
+                                    data-testid={`cart-item-attribute-${convertToKebabCase(this.props.name)}-${capitalizeFirstLetter(convertToKebabCase(selection.displayValue))}`}></div>
                             }
                         })}
                     </div>
@@ -87,7 +87,7 @@ export default class Option extends Component<OptionProps> {
                             return <div 
                                 className='border-[1px] p-1 border-black bg-black text-white text-sm' 
                                 key={index}
-                                data-testid={`cart-item-attribute-${convertToKebabCase(this.props.name)}-${convertToKebabCase(selection.displayValue)}-selected`}>{selection.displayValue}</div>
+                                data-testid={`cart-item-attribute-${convertToKebabCase(this.props.name)}-${capitalizeFirstLetter(convertToKebabCase(selection.displayValue))}-selected`}>{selection.displayValue}</div>
                         } else {
                             if (this.props.isClickable) {
                                 return <button data-testid={`product-attribute-${convertToKebabCase(selection.displayValue)}`} className='border-[1px] p-1 border-black text-sm' key={index} onClick={() => this.handleOptionClicked(index)}>{selection.displayValue}</button>
@@ -95,7 +95,7 @@ export default class Option extends Component<OptionProps> {
                             return <div 
                                 className='border-[1px] p-1 border-black text-sm' 
                                 key={index}
-                                data-testid={`cart-item-attribute-${convertToKebabCase(this.props.name)}-${convertToKebabCase(selection.displayValue)}`}>{selection.displayValue}</div>
+                                data-testid={`cart-item-attribute-${convertToKebabCase(this.props.name)}-${capitalizeFirstLetter(convertToKebabCase(selection.displayValue))}`}>{selection.displayValue}</div>
                         }
                     })}
                 </div>

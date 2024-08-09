@@ -34,3 +34,7 @@ export function convertToKebabCase(str: string): string {
   // Remove leading and trailing hyphens
   .replace(/^-+|-+$/g, '');
 }
+
+export function capitalizeFirstLetter(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
