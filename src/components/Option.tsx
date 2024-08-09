@@ -34,7 +34,7 @@ export default class Option extends Component<OptionProps> {
     render () {
         if (this.props.name === "Color") {
             return (
-                <div data-testid={`cart-item-attribute-${convertToKebabCase(this.props.name)}`}>
+                <div data-testid={`product-attribute-${convertToKebabCase(this.props.name)}`}>
                     <span className='block my-2 text-[#1D1F22] font-light text-sm'>{this.props.name}:</span>
                     <div className='flex flex-wrap items-center gap-2'>
                         {this.props.items.map((selections: object, index: number) => {
@@ -72,7 +72,7 @@ export default class Option extends Component<OptionProps> {
 
         /* If not colors then render component normally */
         return (
-            <div data-testid={`cart-item-attribute-${convertToKebabCase(this.props.name)}`}>
+            <div data-testid={`product-attribute-${convertToKebabCase(this.props.name)}`}>
                 <span className='block my-2 text-[#1D1F22] font-light text-sm'>{this.props.name}:</span>
                 <div className='flex flex-wrap gap-2'>
                     {this.props.items.map((selections: object, index: number) => {

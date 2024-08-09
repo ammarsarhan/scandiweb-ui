@@ -124,7 +124,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
                                             key={index} 
                                             name={option.name} 
                                             items={option.items} 
-                                            isClickable={false}
+                                            isClickable={true}
                                             selected={0}
                                         />
                             })

@@ -30,6 +30,9 @@ class View extends Component<RouteComponentProps> {
         <Route exact path="/">
           <Category variant='all'/>
         </Route>
+        <Route exact path="/all">
+          <Category variant='all'/>
+        </Route>
         <Route exact path="/clothes">
           <Category variant='clothes'/>
         </Route>

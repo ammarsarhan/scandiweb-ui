@@ -61,7 +61,7 @@ export default class Navigation extends Component<{}, NavigationState> {
 
                     {/* Responsivity needs a bit of refining but works for now */}
                     <div className='hidden md:flex'>
-                        <NavLink to="/" className="link" exact>ALL</NavLink>
+                        <NavLink to="/all" className="link" exact>ALL</NavLink>
                         <NavLink to="/clothes" className="link" exact>CLOTHES</NavLink>
                         <NavLink to="/tech" className="link" exact>TECH</NavLink>
                     </div>
@@ -71,7 +71,7 @@ export default class Navigation extends Component<{}, NavigationState> {
                 {
                     this.state.isNavigationActive && 
                     <div className='md:hidden w-screen h-screen fixed bg-white z-50 flex flex-col items-center p-5'>
-                        <NavLink to="/" className="w-full link" exact onClick={this.switchNavigationOpen}>ALL</NavLink>
+                        <NavLink to="/all" className="w-full link" exact onClick={this.switchNavigationOpen}>ALL</NavLink>
                         <NavLink to="/clothes" className="w-full link" exact onClick={this.switchNavigationOpen}>CLOTHES</NavLink>
                         <NavLink to="/tech" className="w-full link" exact onClick={this.switchNavigationOpen}>TECH</NavLink>
                     </div>
