@@ -31,7 +31,7 @@ export default class CartDropdown extends Component {
                           </div>
                           <div className='flex justify-between items-center font-semibold my-8'>
                             <span>Total</span>
-                            <span data-testid='cart-total'>${context.getTotal().toFixed(2)}</span>
+                            <span data-testid='cart-total'>$ {context.getTotal().toFixed(2)}</span>
                           </div>
                           {
                             context.cartItems.length === 0 ?
