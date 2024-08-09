@@ -17,7 +17,7 @@ export default class CartItem extends Component<CartItemType> {
                             {/* First higher-level map through options array */}
                             {this.props.product.attributes.map((element, index) => {
                                 const option = JSON.parse(JSON.stringify(element))
-                                return <Option key={index} name={option.name} items={option.items} isClickable={false} selected={this.props.selectionIndices[index]}/>
+                                return <Option key={index} name={option.name} items={option.items} isProduct={false} selected={this.props.selectionIndices[index]}/>
                             })}
                         </div>
                         <div className='flex flex-col items-center px-8'>

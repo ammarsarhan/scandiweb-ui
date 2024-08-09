@@ -124,10 +124,10 @@ export default class Details extends Component<DetailsProps, DetailsState> {
                             this.state.product.attributes.map((element, index) => {
                                 const option = JSON.parse(JSON.stringify(element))
                                 return <Option 
+                                            isProduct
                                             key={index} 
                                             name={option.name} 
                                             items={option.items} 
-                                            isClickable={true}
                                             selected={0}
                                             onOptionChange={(selection) => this.handleOptionRecieved(index, selection)}
                                         />
@@ -166,13 +166,13 @@ export default class Details extends Component<DetailsProps, DetailsState> {
                             this.state.product.attributes.map((element, index) => {
                                 const option = JSON.parse(JSON.stringify(element))
                                 return <Option 
-                                            key={index} 
-                                            name={option.name} 
-                                            items={option.items} 
-                                            isClickable={true}
-                                            selected={0}
-                                            onOptionChange={(selection) => this.handleOptionRecieved(index, selection)}
-                                        />
+                                    isProduct
+                                    key={index} 
+                                    name={option.name} 
+                                    items={option.items} 
+                                    selected={0}
+                                    onOptionChange={(selection) => this.handleOptionRecieved(index, selection)}
+                                />
                             })
                         }
                         <div className='font-semibold'>
