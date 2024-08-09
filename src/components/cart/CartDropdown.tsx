@@ -21,6 +21,7 @@ export default class CartDropdown extends Component {
                             <span className='font-semibold'>My Bag</span>
                             {context.getQuantity() > 1 && `, ${context.getQuantity()} items`}
                             {context.getQuantity() === 1 && `, ${context.getQuantity()} item`}
+                            {context.getQuantity() === 0 && `, ${context.getQuantity()} items`}
                           </h6>
                           <div className='flex flex-col gap-y-12 max-h-96 md:max-h-80 overflow-y-auto'>
                               {
