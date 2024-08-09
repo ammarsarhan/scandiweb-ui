@@ -16,7 +16,7 @@ export default class CartDropdown extends Component {
               return (
                   <>
                       {/* Actual dropdown section */}
-                      <div className="absolute md:right-10 cart-dropdown bg-white z-50 p-5 w-full h-full md:w-[26rem] md:h-auto">
+                      <div className="absolute md:right-10 cart-dropdown bg-white z-50 p-5 w-full h-full md:w-[26rem] md:h-auto" data-testid="cart-overlay">
                           <h6 className='mt-4 mb-8'>
                             <span className='font-semibold'>My Bag</span>
                             {context.getQuantity() > 1 && `, ${context.getQuantity()} items`}

@@ -30,7 +30,7 @@ export function convertToKebabCase(str: string): string {
   // Replace spaces and underscores with hyphens
   .replace(/[\s_]+/g, '-')
   // Remove any non-alphanumeric characters except hyphens
-  .replace(/[^a-z0-9-]/g, '')
+  .replace(/[^a-zA-Z0-9-]/g, '')
   // Remove leading and trailing hyphens
   .replace(/^-+|-+$/g, '');
 }

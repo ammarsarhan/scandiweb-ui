@@ -43,7 +43,7 @@ export default class Option extends Component<OptionProps> {
                             if (index === this.state.selected) {
                                 if (this.props.isClickable) {
                                     return (
-                                        <button data-testid={`product-attribute-${convertToKebabCase(selection.displayValue)}`} onClick={() => this.handleOptionClicked(index)} className='border-[1px] border-[#5ECE7B] p-[2px]'>
+                                        <button data-testid={`product-attribute-${convertToKebabCase(this.props.name)}-${convertToKebabCase(selection.displayValue)}`} onClick={() => this.handleOptionClicked(index)} className='border-[1px] border-[#5ECE7B] p-[2px]'>
                                             <div className="w-5 h-5" style={{backgroundColor: selection.value}} key={index}></div>
                                         </button>
                                     )
@@ -56,7 +56,7 @@ export default class Option extends Component<OptionProps> {
                                 )
                             } else {
                                 if (this.props.isClickable) {
-                                    return <button data-testid={`product-attribute-${convertToKebabCase(selection.displayValue)}`} onClick={() => this.handleOptionClicked(index)} className="w-5 h-5 border-[1px]" style={{backgroundColor: selection.value}} key={index}></button>
+                                    return <button data-testid={`product-attribute-${convertToKebabCase(this.props.name)}-${convertToKebabCase(selection.displayValue)}`} onClick={() => this.handleOptionClicked(index)} className="w-5 h-5 border-[1px]" style={{backgroundColor: selection.value}} key={index}></button>
                                 }
                                 return <div 
                                     className="w-5 h-5 border-[1px]" 
