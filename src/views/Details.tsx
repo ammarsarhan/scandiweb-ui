@@ -86,7 +86,11 @@ export default class Details extends Component<DetailsProps, DetailsState> {
     
     componentDidMount(): void {
         // Fetch product details and handle loading/error states
-        this.fetchProduct();
+        this.fetchProduct().then(() => {
+            if (this.state.product.inStock) {
+                this.setState({addToCartEnabled: true});
+            }
+        });
     }
 
     handleAddClicked = () => {
@@ -156,7 +160,6 @@ export default class Details extends Component<DetailsProps, DetailsState> {
 
         // In stock
         if (this.state.product.inStock) {
-            this.setState({addToCartEnabled: true});
             return (
                 <div className="w-full lg:grid lg:grid-cols-2 px-16 py-12">
                     <Carousel images={this.state.product.gallery}/>
@@ -177,7 +180,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
                         }
                         <div className='font-semibold'>
                             <h3 className='my-2'>PRICE:</h3>
-                            <span className='text-xl my-2'>{this.state.product.prices[0].currency.symbol}{this.state.product.prices[0].amount.toFixed(2)}</span>
+                            <span className='text-xl my-2'>{this.state.product.prices[0].currency.symbol} {this.state.product.prices[0].amount.toFixed(2)}</span>
                         </div>
                         <button 
                             className='py-4 text-white bg-[#5ECE7B]'
