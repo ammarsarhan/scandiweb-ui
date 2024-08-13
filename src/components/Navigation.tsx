@@ -47,8 +47,13 @@ export default class Navigation extends Component<{}, NavigationState> {
     componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<NavigationState>, snapshot?: any): void {
         // Handle links rendered when page is resized for responsivity
         const links = document.querySelectorAll('a.link');
+        // There is probably a more efficient way to handle this but gets work done for now
         links.forEach((link) => {
             link.setAttribute("data-testid", "category-link");
+
+            if (link.classList.contains("active")) {
+                link.setAttribute("data-testid", "active-category-link");
+            }
         })
     }
 
@@ -65,7 +70,8 @@ export default class Navigation extends Component<{}, NavigationState> {
                         <NavLink to="/clothes" className="link" exact>CLOTHES</NavLink>
                         <NavLink to="/tech" className="link" exact>TECH</NavLink>
                     </div>
-                    <NavLink to="/" className="home absolute left-[calc(50%-20.5px)] link" exact><img src={Logo} alt="Logo"/></NavLink>
+                    {/* If menu is open on mobile when clicked we want to close the menu */}
+                    <NavLink to="/" className="home absolute left-[calc(50%-20.5px)] link" exact onClick={() => this.state.isNavigationActive ? this.setState({isNavigationActive: false}) : null}><img src={Logo} alt="Logo"/></NavLink>
                     <Trigger/>
                 </nav>
                 {
