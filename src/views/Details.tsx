@@ -19,8 +19,7 @@ type DetailsState = {
     product: ProductType;
     loading: boolean;
     error: any | null;
-    selectionIndices: number[];
-    addToCartEnabled: boolean;
+    selectionIndices: number[]
 }
 
 export default class Details extends Component<DetailsProps, DetailsState> {
@@ -31,8 +30,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
         product: {} as ProductType,
         selectionIndices: [] as number[],
         loading: true,
-        error: null,
-        addToCartEnabled: false
+        error: null
     }
 
     fetchProduct = async () => {
@@ -86,11 +84,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
     
     componentDidMount(): void {
         // Fetch product details and handle loading/error states
-        this.fetchProduct().then(() => {
-            if (this.state.product.inStock) {
-                this.setState({addToCartEnabled: true});
-            }
-        });
+        this.fetchProduct()
     }
 
     handleAddClicked = () => {
@@ -105,7 +99,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
         let temp = this.state.selectionIndices;
         temp[index] = option;
         
-        this.setState({selectionIndices: temp, addToCartEnabled: true});
+        this.setState({selectionIndices: temp});
     }
 
     render () {
@@ -141,15 +135,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
                             <h3 className='my-2'>PRICE:</h3>
                             <span className='text-xl my-2'>{this.state.product.prices[0].currency.symbol}{this.state.product.prices[0].amount.toFixed(2)}</span>
                         </div>
-                        {
-                            this.state.addToCartEnabled ?
-                            <button 
-                                className='py-4 text-white bg-[#5ECE7B]'
-                                onClick={this.handleAddClicked}
-                                data-testid='add-to-cart'
-                            >ADD TO CART</button> :
-                            <button disabled className='py-4 text-white bg-[#7d7d7d]' data-testid='add-to-cart'>ADD TO CART</button>
-                        }
+                        <button disabled className='py-4 text-white bg-[#7d7d7d]' data-testid='add-to-cart'>ADD TO CART</button>
                         <div className='parsed' data-testid='product-description'>
                             {ReactHtmlParser(this.state.product.description)}
                         </div>
