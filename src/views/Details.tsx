@@ -19,7 +19,7 @@ type DetailsState = {
     product: ProductType;
     loading: boolean;
     error: any | null;
-    selectionIndices: number[]
+    selectionIndices: (number | null)[]
 }
 
 export default class Details extends Component<DetailsProps, DetailsState> {
@@ -28,7 +28,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
 
     state = {
         product: {} as ProductType,
-        selectionIndices: [] as number[],
+        selectionIndices: [] as (number | null)[],
         loading: true,
         error: null
     }
@@ -74,7 +74,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
         .then(response => response.json())
         .then(data => {
             const product = data.data.product;
-            this.setState({product: product, selectionIndices: Array(product.attributes.length).fill(0), loading: false});
+            this.setState({product: product, selectionIndices: Array(product.attributes.length).fill(null), loading: false});
         })
         .catch(error => {
           console.error('Fetch error:', error);
@@ -126,7 +126,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
                                             key={index} 
                                             name={option.name} 
                                             items={option.items} 
-                                            selected={0}
+                                            selected={null}
                                             onOptionChange={(selection) => this.handleOptionRecieved(index, selection)}
                                         />
                             })
@@ -159,7 +159,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
                                     key={index} 
                                     name={option.name} 
                                     items={option.items} 
-                                    selected={0}
+                                    selected={null}
                                     onOptionChange={(selection) => this.handleOptionRecieved(index, selection)}
                                 />
                             })
@@ -168,11 +168,13 @@ export default class Details extends Component<DetailsProps, DetailsState> {
                             <h3 className='my-2'>PRICE:</h3>
                             <span className='text-xl my-2'>{this.state.product.prices[0].currency.symbol} {this.state.product.prices[0].amount.toFixed(2)}</span>
                         </div>
+                        {this.state.selectionIndices.includes(null) ? 
+                        <button disabled className='py-4 text-white bg-[#7d7d7d]' data-testid='add-to-cart'>ADD TO CART</button> :
                         <button 
                             className='py-4 text-white bg-[#5ECE7B]'
                             onClick={this.handleAddClicked}
                             data-testid='add-to-cart'
-                        >ADD TO CART</button>
+                        >ADD TO CART</button>}
                         <div className='parsed' data-testid='product-description'>
                             {ReactHtmlParser(this.state.product.description)}
                         </div>

@@ -11,8 +11,6 @@ import Details from "@/views/Details";
 class View extends Component<RouteComponentProps> {
   componentDidUpdate(prevProps: any) {
     if (this.props.location !== prevProps.location) {
-      console.log(`Route changed from ${prevProps.location.pathname} to ${this.props.location.pathname}`);
-
       const links = document.querySelectorAll('a.link');
       links.forEach(link => {
         const match = link.getAttribute("href") === this.props.location.pathname;
