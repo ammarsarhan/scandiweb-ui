@@ -15,6 +15,7 @@ export default class App extends Component {
         dropdownActive: false,
         // Define function to set dropdown state by switching current value to opposite
         switchDropdownActive: () => this.state.dropdownActive ? this.setState({dropdownActive: false}) : this.setState({dropdownActive: true}),
+        openDropdown: () => this.setState({dropdownActive: true}),
         cartItems: [] as CartItemType[],
         // Define function to map through array and get the total quantity of products
         getQuantity: () => {

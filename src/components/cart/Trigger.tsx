@@ -13,7 +13,7 @@ export default class Trigger extends Component<{}, TriggerState> {
             <CartContext.Consumer>
                 {(context) => {
                     return (
-                        <button className='relative' onClick={context.switchDropdownActive} data-testid="cart-btn">
+                        <button className='relative' onClick={context.openDropdown} data-testid="cart-btn">
                             { context.getQuantity() > 0 && 
                             <div className='flex-center absolute -top-3 -right-3 bg-black w-5 h-5 rounded-full'>
                                 <span className='font-semibold text-white text-sm align-middle' data-testid="cart-count-bubble">{context.getQuantity()}</span>

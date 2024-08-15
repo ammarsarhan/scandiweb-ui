@@ -7,6 +7,7 @@ import { createContext } from "react";
 const initialCartSettings = {
     dropdownActive: false,
     switchDropdownActive: () => {},
+    openDropdown: () => {},
     cartItems: [],
     getQuantity: () => 0,
     getTotal: () => 0,
@@ -19,6 +20,7 @@ const initialCartSettings = {
 export type CartContextType = {
     dropdownActive: boolean;
     switchDropdownActive: () => void;
+    openDropdown: () => void;
     cartItems: CartItemType[];
     getQuantity: () => number;
     getTotal: () => number;
