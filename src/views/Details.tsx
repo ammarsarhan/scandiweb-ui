@@ -93,7 +93,7 @@ export default class Details extends Component<DetailsProps, DetailsState> {
         const product = {product: this.state.product, quantity: 1, selectionIndices: temp, listIndex: ctx.cartItems.length};
         
         ctx.addProductToCart(product)
-        ctx.switchDropdownActive();
+        // ctx.switchDropdownActive();
     }
 
     handleOptionRecieved = (index: number, option: number) => {
