@@ -11,6 +11,7 @@ export default class CartDropdown extends Component {
         {(context) => {
             if (context.dropdownActive) {
               // Stop user from scrolling while dropdown is active
+              window.scrollTo(0, 0);
               document.body.style.overflow = 'hidden';
               // And return dropdown & overlay
               return (
