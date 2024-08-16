@@ -1,3 +1,8 @@
+# IMPORTANT NOTE
+
+When installing dependencies install with `--legacy-peer-deps` flag.
+Because of nature of requirements of product spec, older tools were used.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
