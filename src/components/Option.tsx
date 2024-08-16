@@ -65,7 +65,6 @@ export default class Option extends Component<OptionProps> {
     
                             // If the index matches the selected index add background color and change text color
                             if (index === this.state.selected) {
-                                console.log(index, this.state.selected, selection.displayValue)
                                 return <button data-testid={`product-attribute-${convertToKebabCase(this.props.name)}-${selection.displayValue}`} className='border-[1px] p-1 border-black bg-black text-white text-sm' key={index} onClick={() => this.handleOptionClicked(index)} >{selection.displayValue}</button>
                             } else {
                                 return <button data-testid={`product-attribute-${convertToKebabCase(this.props.name)}-${selection.displayValue}`} className='border-[1px] p-1 border-black text-sm' key={index} onClick={() => this.handleOptionClicked(index)}>{selection.displayValue}</button>
